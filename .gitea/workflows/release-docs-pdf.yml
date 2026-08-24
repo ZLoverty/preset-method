@@ -26,24 +26,26 @@ jobs:
 
       - name: Build PDF
         run: |
+          set -eu
           mkdir -p dist
-          documents=()
+          document_list="$(mktemp)"
+          combined="$(mktemp)"
+          trap 'rm -f "$document_list" "$combined"' EXIT
+
           while IFS= read -r document; do
             case "$document" in
               ''|\#*) continue ;;
             esac
             test -f "$document"
-            documents+=("$document")
+            printf '%s\n' "$document" >> "$document_list"
           done < docs/pdf-order.txt
 
-          test "${#documents[@]}" -gt 0
-          combined="$(mktemp)"
-          trap 'rm -f "$combined"' EXIT
-          for document in "${documents[@]}"; do
+          test -s "$document_list"
+          while IFS= read -r document; do
             # The source files use --- as visual separators; omit those lines in the PDF.
             sed '/^[[:space:]]*---[[:space:]]*$/d' "$document" >> "$combined"
             printf '\n\n' >> "$combined"
-          done
+          done < "$document_list"
 
           pandoc "$combined" \
             --from=gfm+tex_math_dollars \
