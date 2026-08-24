@@ -69,6 +69,18 @@ Start with the [entry guide](docs/entry.md) for the full workflow overview.
 - [`docs/overview.md`](docs/overview.md) — review the high-level workflow
   diagram.
 
+## PDF Releases
+
+Pushing a version tag named `v*` (for example, `v1.0`) starts the Gitea
+Actions workflow at [`.gitea/workflows/release-docs-pdf.yml`](.gitea/workflows/release-docs-pdf.yml).
+It combines the documents in the order above and attaches
+`polymaker-filament-preset-tuning-guide.pdf` to the matching Gitea Release.
+
+The repository's Gitea Actions runner needs an `ubuntu-latest` label with
+network access to install Pandoc, XeLaTeX, and Noto CJK fonts. The workflow
+uses the built-in `GITEA_TOKEN`; its repository Actions permissions must allow
+release writes.
+
 ## Test Model
 
 `All in one Test.3mf` is the final verification model for the workflow. Print

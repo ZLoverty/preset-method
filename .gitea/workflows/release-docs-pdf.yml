@@ -1,0 +1,103 @@
+name: Publish documentation PDF
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  releases: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      PDF_NAME: polymaker-filament-preset-tuning-guide.pdf
+      RELEASE_API: ${{ gitea.api_url }}/repos/${{ gitea.repository }}/releases
+      RELEASE_TOKEN: ${{ secrets.GITEA_TOKEN }}
+      RELEASE_TAG: ${{ gitea.ref_name }}
+      RELEASE_SHA: ${{ gitea.sha }}
+    steps:
+      - name: Check out the release tag
+        uses: actions/checkout@v4
+
+      - name: Install PDF build tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install --yes \
+            curl \
+            jq \
+            pandoc \
+            texlive-xetex \
+            texlive-lang-chinese \
+            fonts-noto-cjk
+
+      - name: Build PDF
+        run: |
+          mkdir -p dist
+          pandoc \
+            docs/entry.md \
+            docs/printer-calibration.md \
+            docs/base-preset-standard.md \
+            docs/cooling.md \
+            docs/temperature-tower.md \
+            docs/max-volumetric-speed.md \
+            docs/flow-ratio.md \
+            docs/pressure-advance.md \
+            docs/retraction.md \
+            docs/overview.md \
+            --from=gfm+tex_math_dollars \
+            --resource-path=docs \
+            --pdf-engine=xelatex \
+            --toc \
+            --number-sections \
+            --metadata title="Polymaker Filament Preset Tuning Guide" \
+            --metadata author="Polymaker" \
+            --variable mainfont="Noto Sans" \
+            --variable CJKmainfont="Noto Sans CJK SC" \
+            --output "dist/${PDF_NAME}"
+
+      - name: Create or reuse the Gitea release
+        id: release
+        run: |
+          set -eu
+          release="$(curl --silent --show-error --fail \
+            --header "Authorization: token ${RELEASE_TOKEN}" \
+            "${RELEASE_API}/tags/${RELEASE_TAG}" || true)"
+
+          if [ -z "$release" ]; then
+            release="$(curl --silent --show-error --fail \
+              --request POST \
+              --header "Authorization: token ${RELEASE_TOKEN}" \
+              --header "Content-Type: application/json" \
+              --data "{\"tag_name\":\"${RELEASE_TAG}\",\"target_commitish\":\"${RELEASE_SHA}\",\"name\":\"${RELEASE_TAG}\"}" \
+              "${RELEASE_API}")"
+          fi
+
+          release_id="$(printf '%s' "$release" | jq --raw-output '.id')"
+          test "$release_id" != "null"
+          printf 'id=%s\n' "$release_id" >> "$GITHUB_OUTPUT"
+
+      - name: Replace the PDF attachment
+        env:
+          RELEASE_ID: ${{ steps.release.outputs.id }}
+        run: |
+          set -eu
+          existing_id="$(curl --silent --show-error --fail \
+            --header "Authorization: token ${RELEASE_TOKEN}" \
+            "${RELEASE_API}/${RELEASE_ID}/assets" \
+            | jq --raw-output ".[] | select(.name == \"${PDF_NAME}\") | .id")"
+
+          if [ -n "$existing_id" ]; then
+            curl --silent --show-error --fail \
+              --request DELETE \
+              --header "Authorization: token ${RELEASE_TOKEN}" \
+              "${RELEASE_API}/${RELEASE_ID}/assets/${existing_id}"
+          fi
+
+          curl --silent --show-error --fail \
+            --request POST \
+            --header "Authorization: token ${RELEASE_TOKEN}" \
+            --form "attachment=@dist/${PDF_NAME}" \
+            "${RELEASE_API}/${RELEASE_ID}/assets"
