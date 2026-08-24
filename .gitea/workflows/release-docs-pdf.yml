@@ -15,7 +15,7 @@ jobs:
     container:
       image: 192.168.22.78:3000/polymaker/docs-pdf:1.0.0
     env:
-      PDF_NAME: polymaker-filament-preset-tuning-guide.pdf
+      PDF_NAME: polymaker-filament-preset-tuning-guide-${{ gitea.ref_name }}.pdf
       RELEASE_API: ${{ gitea.api_url }}/repos/${{ gitea.repository }}/releases
       RELEASE_TOKEN: ${{ secrets.GITEA_TOKEN }}
       RELEASE_TAG: ${{ gitea.ref_name }}

@@ -74,7 +74,8 @@ Start with the [entry guide](docs/entry.md) for the full workflow overview.
 Pushing a version tag named `v*` (for example, `v1.0`) starts the Gitea
 Actions workflow at [`.gitea/workflows/release-docs-pdf.yml`](.gitea/workflows/release-docs-pdf.yml).
 It combines the documents in the order above and attaches
-`polymaker-filament-preset-tuning-guide.pdf` to the matching Gitea Release.
+`polymaker-filament-preset-tuning-guide-<tag>.pdf` to the matching Gitea
+Release (for example, `polymaker-filament-preset-tuning-guide-v1.0.pdf`).
 
 The repository's Gitea Actions runner needs an `ubuntu-latest` label with
 network access to install Pandoc, XeLaTeX, and Noto CJK fonts. The workflow
