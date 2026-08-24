@@ -37,7 +37,15 @@ jobs:
           done < docs/pdf-order.txt
 
           test "${#documents[@]}" -gt 0
-          pandoc "${documents[@]}" \
+          combined="$(mktemp)"
+          trap 'rm -f "$combined"' EXIT
+          for document in "${documents[@]}"; do
+            # The source files use --- as visual separators; omit those lines in the PDF.
+            sed '/^[[:space:]]*---[[:space:]]*$/d' "$document" >> "$combined"
+            printf '\n\n' >> "$combined"
+          done
+
+          pandoc "$combined" \
             --from=gfm+tex_math_dollars \
             --resource-path=docs \
             --pdf-engine=xelatex \
