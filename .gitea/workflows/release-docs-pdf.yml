@@ -12,6 +12,8 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    container:
+      image: 192.168.22.78:3000/polymaker/docs-pdf:1.0.0
     env:
       PDF_NAME: polymaker-filament-preset-tuning-guide.pdf
       RELEASE_API: ${{ gitea.api_url }}/repos/${{ gitea.repository }}/releases
@@ -22,16 +24,7 @@ jobs:
       - name: Check out the release tag
         uses: actions/checkout@v4
 
-      - name: Install PDF build tools
-        run: |
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install --yes \
-            curl \
-            jq \
-            pandoc \
-            texlive-xetex \
-            texlive-lang-chinese \
-            fonts-noto-cjk
+     
 
       - name: Build PDF
         run: |
