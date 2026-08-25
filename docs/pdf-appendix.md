@@ -1,5 +1,3 @@
-```{=latex}
 \appendix
-```
 
-# Appendix {.unnumbered}
+# Appendix

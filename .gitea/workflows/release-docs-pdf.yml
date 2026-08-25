@@ -48,7 +48,7 @@ jobs:
           done < "$document_list"
 
           pandoc "$combined" \
-            --from=gfm+tex_math_dollars \
+            --from=gfm+tex_math_dollars+raw_tex+raw_attribute+header_attributes \
             --resource-path=docs \
             --pdf-engine=xelatex \
             --toc \
