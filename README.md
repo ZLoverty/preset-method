@@ -82,6 +82,19 @@ network access to install Pandoc, XeLaTeX, and Noto CJK fonts. The workflow
 uses the built-in `GITEA_TOKEN`; its repository Actions permissions must allow
 release writes.
 
+To build the same PDF locally, run the shared script in the PDF tools image:
+
+```sh
+docker run --rm \
+  --env PDF_NAME=polymaker-filament-preset-tuning-guide-local.pdf \
+  --volume "$PWD:/workspace" \
+  --workdir /workspace \
+  192.168.22.78:3000/polymaker/docs-pdf:1.0.0 \
+  sh scripts/build-pdf.sh
+```
+
+The result is written to `dist/` and is not uploaded to a Release.
+
 ## Test Model
 
 `All in one Test.3mf` is the final verification model for the workflow. Print

@@ -25,39 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build PDF
-        run: |
-          set -eu
-          mkdir -p dist
-          document_list="$(mktemp)"
-          combined="$(mktemp)"
-          trap 'rm -f "$document_list" "$combined"' EXIT
-
-          while IFS= read -r document; do
-            case "$document" in
-              ''|\#*) continue ;;
-            esac
-            test -f "$document"
-            printf '%s\n' "$document" >> "$document_list"
-          done < docs/pdf-order.txt
-
-          test -s "$document_list"
-          while IFS= read -r document; do
-            # The source files use --- as visual separators; omit those lines in the PDF.
-            sed '/^[[:space:]]*---[[:space:]]*$/d' "$document" >> "$combined"
-            printf '\n\n' >> "$combined"
-          done < "$document_list"
-
-          pandoc "$combined" \
-            --from=gfm+tex_math_dollars+raw_tex+raw_attribute+header_attributes \
-            --resource-path=docs \
-            --pdf-engine=xelatex \
-            --toc \
-            --number-sections \
-            --metadata title="Polymaker Filament Preset Tuning Guide" \
-            --metadata author="Polymaker" \
-            --variable mainfont="Noto Sans" \
-            --variable CJKmainfont="Noto Sans CJK SC" \
-            --output "dist/${PDF_NAME}"
+        run: sh scripts/build-pdf.sh
 
       - name: Create or reuse the Gitea release
         id: release
