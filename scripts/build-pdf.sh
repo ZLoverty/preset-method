@@ -44,7 +44,7 @@ while IFS= read -r document; do
 done < "$document_list"
 
 pandoc "$combined" \
-  --from=markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+header_attributes \
+  --from=markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+header_attributes-smart \
   --resource-path=docs \
   --pdf-engine=xelatex \
   --toc \
