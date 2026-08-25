@@ -50,8 +50,11 @@ pandoc "$combined" \
   --number-sections \
   --metadata title="Polymaker Filament Preset Tuning Guide" \
   --metadata author="Polymaker" \
-  --variable mainfont="Noto Sans" \
-  --variable CJKmainfont="Noto Sans CJK SC" \
+  --variable mainfont="Noto Serif" \
+  --variable CJKmainfont="Noto Serif CJK SC" \
+  --variable geometry:margin=3cm \
+  --variable linestretch=1.2 \
+  --variable fontsize=10.5pt \
   --output "dist/${PDF_NAME}"
 
 test -s "dist/${PDF_NAME}"
