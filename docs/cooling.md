@@ -9,21 +9,21 @@
 
 ---
 
-## 1. Purpose
+## Purpose
 
 1. Find the shortest printable layer time at different fan speeds.
 2. Use the result to set reasonable fan-threshold parameters ($Fan_{\text{min}}$, $Fan_{\text{max}}$, $Layer_{\text{min}}$, $Layer_{\text{max}}$) that reduce warping and improve accuracy and detail.
 
 ---
 
-## 2. Principle
+## Principle
 
 1. A 45° overhang pyramid printed at 50 mm/s is used to create a range of layer times. Fan power is then varied to find the minimum and maximum fan speeds and their corresponding layer times for the material.
 2. PLA (polylactic acid) is a semi-crystalline, low-glass-transition material ($T_g \approx 60^\circ C$). Unlike engineering plastics such as ABS or ASA, PLA needs rapid cooling after extrusion to solidify. Because PLA's $T_g$ is usually between 50 °C and 60 °C, insufficient cooling can soften the filament inside the heatbreak and cause a clog. At the same time, PLA keeps excellent interlayer bonding even with heavy cooling, so most manufacturers (including Bambu Lab) set the minimum fan speed to 100% or close to it by default. Therefore, cooling calibration for PLA only needs to find the maximum fan-speed threshold.
 
 ---
 
-## 3. Variable Definitions
+## Variable Definitions
 
 | Variable | Symbol | Description |
 |-|-|-|
@@ -40,14 +40,14 @@
 
 ---
 
-## 4. Preparation
+## Preparation
 
 1. Dry the filament thoroughly.
 2. Edit the filament profile: set the **nozzle temperature** to the highest printable temperature for the material, enable **keep fan always on**, disable **slow down print for better cooling**, and disable **force cooling for overhangs/bridges**.
 
 ---
 
-## 5. PLA Procedure
+## PLA Procedure
 
 1. **Model selection**: In the **process test 3MF** file, select the **short-layer-time cooling** model.
 2. **Fan settings**: Fix the fan at **100%**, and set both the **maximum fan speed threshold** and the **minimum fan speed threshold** to 100%.
@@ -62,9 +62,9 @@
 
 ---
 
-## 6. Non-PLA Procedure
+## Non-PLA Procedure
 
-### 6.1 Find Minimum Fan Speed and Layer-Time Threshold
+### Find Minimum Fan Speed and Layer-Time Threshold
 
 1. **Model selection**: In the **process test 3MF** file, select the **full-layer-time cooling** model.
 2. **Fan settings**: Fix the fan at **0%**, and set both the **maximum fan speed threshold** and the **minimum fan speed threshold** to 0%.
@@ -78,7 +78,7 @@
    - Case 2: $Fan_{\text{min}} = 0\%$; $Layer_{\text{min}} =$ shortest printable layer time
    - Case 3: $Fan_{\text{min}} =$ fan speed at shortest printable layer time; $Layer_{\text{min}} =$ shortest printable layer time
 
-### 6.2 Find Maximum Fan Speed and Layer-Time Threshold (6 s Check)
+### Find Maximum Fan Speed and Layer-Time Threshold (6 s Check)
 
 1. **Model selection**: In the **process test 3MF** file, select the **short-layer-time cooling** model.
 2. **Fan settings**: Start from the fan speed found for the shortest printable layer time, and increase in 10% steps.
@@ -92,7 +92,7 @@
 
 ---
 
-## 7. Notes
+## Notes
 
 - Make sure the test conditions match the actual printer and material used.
 - Change one variable at a time (fan speed or layer time).
@@ -101,7 +101,7 @@
 
 ---
 
-## 8. Why 6 Seconds? (Background)
+## Why 6 Seconds? (Background)
 
 - Most test models reach a **shortest layer time of about 2 s** (for example, the boat chimney and the sharp tower in the comprehensive model).
 - When **slow print for better cooling** is enabled, print speed is clamped to the **minimum print speed** (typically 10 mm/s), which stretches a 2 s layer to about 6 s.

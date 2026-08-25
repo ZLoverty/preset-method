@@ -1,15 +1,15 @@
-# Retraction Test (retraction)
+# Retraction
 
-## Scope
+**Applicable to:**
 
-- For all FDM printers.
-- For all non-foaming thermoplastic materials.
+- All FDM printers.
+- All non-foaming thermoplastic materials.
 
-## 1. Purpose
+## Purpose
 
 Determine the best retraction distance for the material on the target printer and process settings. The goal is to find the value that minimizes stringing and oozing without retracting so far that it causes clogging or under-extrusion, so the printed parts have clean surface quality and the process stays stable.
 
-## 2. Preparation
+## Preparation
 
 1. Enable **Developer Mode** in the slicer preferences.
 2. Open the **Calibration** menu and select **Retraction Test**.
@@ -17,9 +17,9 @@ Determine the best retraction distance for the material on the target printer an
 
 ---
 
-## 3. Procedure
+## Procedure
 
-### 3.1 Test Flow
+### Test Flow
 
 1. **Parameter setup**: Confirm that temperature, cooling, maximum volumetric speed, and flow ratio are already set from previous calibration results.
 2. **Print the model**: Print the Retraction Test.
@@ -30,7 +30,7 @@ Determine the best retraction distance for the material on the target printer an
 
 ---
 
-## 4. Archiving
+## Archiving
 
 1. Mark the material name, test date, and the position / parameters of the best block on the test piece base with a marker.
 2. Keep the physical sample for later re-inspection.

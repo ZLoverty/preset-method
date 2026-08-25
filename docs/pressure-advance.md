@@ -1,27 +1,27 @@
 # Pressure Advance (pressure-advance)
 
-# Scope
+**Applicable to:**
 
 - Hard / semi-hard materials (PLA, PETG, PA-CF, etc.): use PA Tower.
 - Flexible plastics (TPU, TPEE, etc.): use PA Pattern.
 - Only for printers and firmware that support Pressure Advance / K-Factor.
 
-## 1. Purpose
+## Purpose
 
 Determine the optimal Pressure Advance value for the material on the target printer and process settings. The result provides a reliable reference for building a preset library and enabling consistent production runs.
 
 ---
 
-## 2. Preparation
+## Preparation
 
 1. Enable **Developer Mode** in the slicer preferences.
 2. Open the **Calibration** menu and select **Pressure Advance Calibration**.
 3. Choose **PA Tower** for rigid filaments or **PA Pattern** for flexible filaments.
 4. Set `PA_start` to 0, `PA_end` to 1, and `PA_step` to 0.002.
 
-## 3. Procedure
+## Procedure
 
-### 3.1 Hard and Semi-Hard Materials (PA Tower)
+### Hard and Semi-Hard Materials (PA Tower)
 
 1. **Parameter setup**: Set temperature, cooling, maximum volumetric speed, and flow ratio based on previous calibration results.
 2. **Print the model**: Print the PA Tower.
@@ -30,7 +30,7 @@ Determine the optimal Pressure Advance value for the material on the target prin
 5. **Calculate PA**:  
    $PA = PA_{start} + PA_{step} \times n$ (where $n$ is the test height / step index)
 
-### 3.2 Flexible Plastics (PA Pattern)
+### Flexible Plastics (PA Pattern)
 
 1. **Parameter setup**: Set temperature, cooling, maximum volumetric speed, and flow ratio based on previous calibration results.
 2. **Print the model**: Print the PA Pattern.
@@ -39,7 +39,7 @@ Determine the optimal Pressure Advance value for the material on the target prin
 
 ---
 
-## 4. Archiving
+## Archiving
 
 1. Mark the corresponding height on the test part with a marker.
 2. Keep the physical sample for later re-inspection.

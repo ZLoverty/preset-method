@@ -1,6 +1,4 @@
-# Polymaker Filament Preset Tuning Guide
-
-**Author: Polymaker**
+# Introduction
 
 This guide presents the exact experimental workflows we use at Polymaker to calibrate our official filament presets. Each topic below links to a dedicated document with the full procedure.
 

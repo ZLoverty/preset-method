@@ -7,27 +7,27 @@
 
 ---
 
-## 1. Purpose
+## Purpose
 
 1. Find a reasonable print-temperature range for the filament.
 2. Use the result to set a suitable **nozzle temperature** and **recommended nozzle-temperature range**, reducing stringing, cracking, and warping while improving accuracy and detail.
 
 ---
 
-## 2. Principle
+## Principle
 
 `M104` commands are inserted between layers to change the nozzle temperature. By comparing stringing, bridging, overhang quality, and surface detail across the different temperature bands, a reasonable temperature range can be determined and the optimal print temperature selected.
 
 ---
 
-## 3. Preparation
+## Preparation
 
 1. Dry the filament thoroughly.
 2. Edit the filament profile: set the **nozzle temperature** to the highest printable temperature for the material, configure the fan thresholds according to the results of the cooling calibration, enable **keep fan always on**, disable **slow down print for better cooling**, and disable **force cooling for overhangs/bridges**.
 
 ---
 
-## 4. Procedure
+## Procedure
 
 1. **Model selection**: In the **process test 3MF** file, select the **temperature tower test** model.
 2. **Temperature settings**: Set the **nozzle temperature** in the filament profile to the highest printable temperature for the material. After slicing, insert an `M104 Sxx` command every 50 layers to lower the temperature by 10 °C. (For example, if the highest PLA print temperature is 250 °C, add `M104 S240` at layer Z=50, `M104 S230` at Z=100, and so on.)

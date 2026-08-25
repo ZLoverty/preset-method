@@ -2,14 +2,14 @@
 
 > References: [Bambu Studio Flow Rate Calibration](https://wiki.bambulab.com/en/software/bambu-studio/calibration_flow_rate) | [Reddit Guide](https://www.reddit.com/r/BambuLab/comments/1astmkp/easy_to_follow_flow_ratio_calibration/)
 
-**Applicability:**
+**Applicable to:**
 
 - All materials
 - Most 3D printers
 
 ---
 
-## 1. Purpose
+## Purpose
 
 This test uses a systematic experiment to find the best flow ratio for a given filament and printer combination. It prints a series of calibration patches with increasing flow ratios and evaluates their top-surface quality, correcting the difference between the slicer's theoretical extrusion and the actual physical extrusion.
 
@@ -21,7 +21,7 @@ After calibration, the flow ratio will:
 
 ---
 
-## 2. Principle
+## Principle
 
 This test follows the single-variable rule. Using the slicer's modifier function, it prints an array of test blocks with a graded range of flow ratios. The top surface of each block is compared to judge the extrusion deviation:
 
@@ -33,7 +33,7 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
 
 ---
 
-## 3. Variable Definitions
+## Variable Definitions
 
 - $F_{Default}$: the initial flow ratio set for the filament (usually recommended as 1.0).
 - $F_{RoughTuned}$: the intermediate flow ratio determined during the rough-tune stage.
@@ -42,16 +42,16 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
 
 ---
 
-## 4. Preparation
+## Preparation
 
 1. **Filament preparation**: Make sure the filament is dry; moisture can create bubbles that disturb surface inspection.
 2. **Parameter settings**: Set **temperature**, **print speed**, and **cooling parameters** according to the previous test results. Enable **forced cooling** and **slow down for better cooling**.
 
 ---
 
-## 5. Procedure
+## Procedure
 
-### 5.1 Rough Tune Stage
+### Rough Tune Stage
 
 1. **Parameter setting**: Set the filament flow ratio to the initial value $F_{Default}$ (usually 1.0).
 2. **Model selection**: In the **Print Process Test 3MF** file, choose **Flow Ratio Rough Tune**.
@@ -65,7 +65,7 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
    - Calculate the rough-tuned flow ratio: $F_{RoughTuned} = F_{Default} \times Multiplier_{Rough}$
    - Example: if $F_{Default} = 1.0$ and $Multiplier_{Rough} = +5$, then $F_{RoughTuned} = 1.05$.
 
-### 6.2 Fine Tune Stage
+### Fine Tune Stage
 
 1. **Update parameter**: Set the filament flow ratio to $F_{RoughTuned}$.
 2. **Model selection**: In the **Print Process Test 3MF** file, choose **Flow Ratio Fine Tune**.
@@ -77,7 +77,7 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
 
 ---
 
-## 7. Results Recording
+## Results Recording
 
 $F_{FineTuned}$ = **optimal extrusion flow ratio**
 
