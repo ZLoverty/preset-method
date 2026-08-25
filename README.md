@@ -87,6 +87,7 @@ To build the same PDF locally, run the shared script in the PDF tools image:
 ```sh
 docker run --rm \
   --env PDF_NAME=polymaker-filament-preset-tuning-guide-local.pdf \
+  --env PDF_VERSION=local \
   --volume "$PWD:/workspace" \
   --workdir /workspace \
   192.168.22.78:3000/polymaker/docs-pdf:1.0.0 \

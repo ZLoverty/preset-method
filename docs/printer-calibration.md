@@ -1,3 +1,5 @@
+\appendix
+
 # Printer Calibration
 
 This guide covers the essential calibration steps you should run before building or tuning a filament preset. Whether you are working with a single machine or a small farm, the goal is the same: establish a reliable baseline so that later parameter changes are meaningful.

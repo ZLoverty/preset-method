@@ -7,6 +7,7 @@ repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
 cd "$repo_root"
 
 : "${PDF_NAME:=polymaker-filament-preset-tuning-guide-local.pdf}"
+: "${PDF_VERSION:=local}"
 
 for command in pandoc xelatex sed mktemp; do
   command -v "$command" >/dev/null 2>&1 || {
@@ -50,6 +51,7 @@ pandoc "$combined" \
   --number-sections \
   --metadata title="Polymaker Filament Preset Tuning Guide" \
   --metadata author="Polymaker" \
+  --metadata date="Release ${PDF_VERSION}" \
   --variable mainfont="Noto Serif" \
   --variable CJKmainfont="Noto Serif CJK SC" \
   --variable geometry:margin=3cm \

@@ -20,6 +20,7 @@ jobs:
       RELEASE_TOKEN: ${{ secrets.GITEA_TOKEN }}
       RELEASE_TAG: ${{ gitea.ref_name }}
       RELEASE_SHA: ${{ gitea.sha }}
+      PDF_VERSION: ${{ gitea.ref_name }}
     steps:
       - name: Check out the release tag
         uses: actions/checkout@v4
