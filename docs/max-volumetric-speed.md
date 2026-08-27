@@ -20,10 +20,10 @@ Print speed is increased step by step, which raises the volumetric flow rate. On
 
 ## Preparation
 
-1. In the slicer's process settings, confirm **Sparse infill acceleration ≥ 3000 mm/s²**.
+1. In the slicer's process settings, confirm **Sparse infill acceleration** $\ge 3000\;\text{mm/s}^2$.
 2. Edit the filament profile:
-   - Disable "slow down for better cooling".
-   - Set **Max volumetric speed = 500 mm³/s** to remove the slicer-side flow limit.
+   - Disable **Slow down for better cooling**.
+   - Set **Max volumetric speed** $= 500 \;\text{mm}^3\text{/s}$ to remove the slicer-side flow limit.
    - Set **printing temperature** and **cooling parameters** according to the previous test results.
 
 ---
@@ -47,35 +47,35 @@ Print speed is increased step by step, which raises the volumetric flow rate. On
 
 **Cross-sectional area formula**
 
-$$A = m_{height} \times \Big(m_{width} - m_{height} \times (1 - 0.25\pi)\Big)$$
+$$A = m_{\text{height}} \times \Big(m_{\text{width}} - m_{\text{height}} \times (1 - 0.25\pi)\Big)$$
 
 **Volumetric flow formula**
 
-$$Q_{max} = v \times A \quad ({mm}^3/{s})$$
+$$Q_{\text{max}} = v \times A \; (\text{mm}^3/\text{s})$$
 
 Where:
 
-- $m_{height}$: layer height (mm)
-- $m_{width}$: line width (mm)
+- $m_{\text{height}}$: layer height (mm)
+- $m_{\text{width}}$: line width (mm)
 - $v$: line speed (mm/s)
 
 ---
 
 ### Example (Slic3r-based)
 
-Assume $m_{height} = 0.2$ mm, $m_{width} = 0.45$ mm, and $v_{ok} = 200$ mm/s:
+Assume $m_{\text{height}} = 0.2$ mm, $m_{\text{width}} = 0.45$ mm, and $v_{\text{ok}} = 200$ mm/s:
 
 1. Calculate the cross-sectional area:
 
-$$A \approx 0.0814 { mm}^3/{mm}$$
+$$A = 0.2 \times \Big( 0.45 - 0.2 \times (1 - 0.25\pi) \Big) \approx 0.0814 \; \text{mm}^2$$
 
 2. Calculate the volumetric flow rate:
 
-$$Q = 200 \times 0.0814 \approx 16.28 { mm}^3/\text{s}$$
+$$Q = 200 \times 0.0814 \approx 16.28 \; \text{mm}^3/\text{s}$$
 
 ---
 
 ### Non-Slic3r-based Slicers
 
-- Read the **volumetric flow rate (mm³/s)** directly from the slicer preview or G-code analysis.
-- Use the volumetric flow rate of the fastest no-NG level as $Q_{max}$; no extra calculation is needed.
+- Read the **volumetric flow rate** ($\text{mm}^3/\text{s}$) directly from the slicer preview or G-code analysis.
+- Use the volumetric flow rate of the fastest no-NG level as $Q_{\text{max}}$; no extra calculation is needed.

@@ -35,10 +35,10 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
 
 ## Variable Definitions
 
-- $F_{Default}$: the initial flow ratio set for the filament (usually recommended as 1.0).
-- $F_{RoughTuned}$: the intermediate flow ratio determined during the rough-tune stage.
-- $F_{FineTuned}$: the final optimal flow ratio determined during the fine-tune stage.
-- $Multiplier$: the flow multiplier percentage marked on the test model (for example, 5 means +5%, i.e. 1.05×).
+- $F_{\text{Default}}$: the initial flow ratio set for the filament (usually recommended as 1.0).
+- $F_{\text{RoughTuned}}$: the intermediate flow ratio determined during the rough-tune stage.
+- $F_{\text{FineTuned}}$: the final optimal flow ratio determined during the fine-tune stage.
+- $\lambda$: the flow multiplier percentage marked on the test model (for example, 5 means +5%, i.e. 1.05×).
 
 ---
 
@@ -53,17 +53,17 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
 
 ### Rough Tune Stage
 
-1. **Parameter setting**: Set the filament flow ratio to the initial value $F_{Default}$ (usually 1.0).
+1. **Parameter setting**: Set the filament flow ratio to the initial value $F_{\text{Default}}$ (usually 1.0).
 2. **Model selection**: In the **Print Process Test 3MF** file, choose **Flow Ratio Rough Tune**.
 3. **Inspection**: Check whether the top surface shows raised arcs:
-   - If **all models show raised arcs**, the starting flow is too high. Reduce the flow by **16%** (i.e. $F_{New Default} = F_{Default} \times (100\% - 16\%)$) and repeat.
-   - If **none of the models show raised arcs**, the flow is too low. Increase the flow by **4%** (i.e. $F_{New Default} = F_{Default} \times (100\% + 4\%)$) and repeat.
+   - If **all models show raised arcs**, the starting flow is too high. Reduce the flow by **16%** (i.e. $F_{\text{New Default}} = F_{\text{Default}} \times (100\% - 16\%)$) and repeat.
+   - If **none of the models show raised arcs**, the flow is too low. Increase the flow by **4%** (i.e. $F_{\text{New Default}} = F_{\text{Default}} \times (100\% + 4\%)$) and repeat.
    - Continue until the result contains both blocks with raised arcs and blocks without raised arcs.
 4. **Calculation and recording**:
-   - Record the base flow ratio $F_{Default}$ used.
-   - Find the **first test block that shows raised arcs** and note its marked multiplier $Multiplier_{Rough}$.
-   - Calculate the rough-tuned flow ratio: $F_{RoughTuned} = F_{Default} \times Multiplier_{Rough}$
-   - Example: if $F_{Default} = 1.0$ and $Multiplier_{Rough} = +5$, then $F_{RoughTuned} = 1.05$.
+   - Record the base flow ratio $F_{\text{Default}}$ used.
+   - Find the **first test block that shows raised arcs** and note its marked multiplier $\lambda_{\text{Rough}}$.
+   - Calculate the rough-tuned flow ratio: $F_{\text{RoughTuned}} = F_{\text{Default}} \times \lambda_{\text{Rough}}$
+   - Example: if $F_{\text{Default}} = 1.0$ and $\lambda_{\text{Rough}} = +5$, then $F_{\text{RoughTuned}} = 1.05$.
 
 ### Fine Tune Stage
 
