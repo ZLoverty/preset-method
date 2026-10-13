@@ -24,7 +24,7 @@ A key-shaped model with a sharp tip is printed at different bed temperatures to 
 
 ## Procedure
 
-1. **Slicer settings**: set bed temperature to the lowest printable bed temperature, wall loops to 15, outer / inner wall speed to 100.
+1. **Slicer settings**: set bed temperature to the lowest printable bed temperature, fan speed to 0, wall loops to 15, outer / inner wall speed to 100.
 2. **Preview check**: after slicing, confirm that the bed temperature, wall loops and speed settings match the intended values.
 3. **Observe and record**
     - case 1: if the sharp tip does not curl up, record the current bed temperature as the bed temperature (complete);
