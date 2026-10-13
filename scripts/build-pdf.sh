@@ -76,7 +76,7 @@ pandoc "$combined" \
   --variable CJKmainfont="SimSun" \
   --variable geometry:margin=3cm \
   --variable linestretch=1.2 \
-  --variable fontsize=10.5pt \
+  --variable fontsize=11pt \
   --output "dist/${pdf_output}"
 
 test -s "dist/${pdf_output}"
