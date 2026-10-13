@@ -29,7 +29,7 @@ A key-shaped model with a sharp tip is printed at different bed temperatures to 
 3. **Observe and record**
     - case 1: if the sharp tip does not curl up, record the current bed temperature as the bed temperature (complete);
     - case 2: if the sharp tip does curl up, record the current bed temperature as the candidate. Increase the bed temperature in steps of 10℃ and print the key model, until maximum printable bed temperature is reached. At each step:
-        - case 2.1: if current curling distance $\lt$ previous curling distance, update the candidate with the current bed temperature;
+        - case 2.1: if current curling distance $<$ previous curling distance, update the candidate with the current bed temperature;
         - case 2.2: if current curling distance $\ge$ previous curling distance, do not update.
 
 ## Notes
