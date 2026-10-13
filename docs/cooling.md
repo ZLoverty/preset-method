@@ -7,6 +7,7 @@
 - Rigid plastics (PLA, PETG, ABS, PA, etc.)
 - Most FDM 3D printers
 
+![cooling-tower-ref](assets/cooling-abstract.png)
 ---
 
 ## Purpose
@@ -32,11 +33,7 @@
 | Minimum Fan Speed Threshold Layer Time | $Layer_{\text{min}}$ | Layer time threshold below which minimum fan speed is applied (s). |
 | Maximum Fan Speed Threshold Layer Time | $Layer_{\text{max}}$ | Layer time threshold above which maximum fan speed is applied (s). |
 
-> **Note:**
->
-> $Layer_{\text{min}}$ is the larger number.
->
-> $Layer_{\text{max}}$ is the smaller number.
+![cooling-params-def](assets\cooling_params_def.png)
 
 ---
 
@@ -47,48 +44,30 @@
 
 ---
 
-## PLA Procedure
+## Procedure
 
-1. **Model selection**: In the **process test 3MF** file, select the **short-layer-time cooling** model.
+### PLA / TPU Procedure
+
+1. **Model**: from **model library**, download the **cooling fillet** model.
 2. **Fan settings**: Fix the fan at **100%**, and set both the **maximum fan speed threshold** and the **minimum fan speed threshold** to 100%.
 3. **Preview check**: After slicing, confirm that the **fan**, **layer time**, and **temperature** settings match the intended values.
-4. **Observation and selection**: Check whether the overhangs curl at different layer times. Choose the shortest layer time that still prints without curling, and define it as the **maximum fan speed threshold layer time**.
-5. **Record**:
+4. **Observe and record**: find the **shortest printable layer time** that still prints without obvious curling (see example picture for reference), and record 
+   - $Layer_{\text{max}} = $ shortest printable layer time
    - $Fan_{\text{max}} = 100\%$
    - $Fan_{\text{min}} = 100\%$
    - $Layer_{\text{min}} = 100\,\text{s}$ (standard value)
-   - $Layer_{\text{max}} =$ shortest printable layer time
-6. Test complete.
 
----
+### Non-PLA Procedure
 
-## Non-PLA Procedure
+1. **Model**: from **model library**, download the **cooling fillet** model.
+2. **Fan settings**: fix the fan at **0%**, and set both the **maximum fan speed threshold** and the **minimum fan speed threshold** to 0%.
+3. **Preview check**: after slicing, confirm that the **fan**, **layer time**, and **temperature** settings match the intended values.
+4. **Observe and record**: find the shortest layer time $\tau$ that still prints without obvious curling (see example picture for reference).
+   - Case 1: If $\tau \le 6\,\text{s}$, record $Fan_{\text{max}} = 0\%$; $Fan_{\text{min}} = 0\%$; $Layer_{\text{min}} = 6\,\text{s}$ (standard value); $Layer_{\text{max}} = 100\,\text{s}$ (complete);
+   - Case 2: If $\tau > 6\,\text{s}$, record $Layer_{\text{min}}=\tau$, with $Fan_{\text{min}} = 0\%$;
+   - Case 3: If no $\tau$ is found, it means the material requires active cooling. Increase the fan in 10% steps until a $\tau$ is found. Record $Layer_{\text{min}}=\tau$, with $Fan_{\text{min}} =$ the corresponding fan speed.
 
-### Find Minimum Fan Speed and Layer-Time Threshold
-
-1. **Model selection**: In the **process test 3MF** file, select the **full-layer-time cooling** model.
-2. **Fan settings**: Fix the fan at **0%**, and set both the **maximum fan speed threshold** and the **minimum fan speed threshold** to 0%.
-3. **Preview check**: After slicing, confirm that the **fan**, **layer time**, and **temperature** settings match the intended values.
-4. **Observation and selection**: Check whether the overhangs curl at different layer times. Choose the shortest layer time that still prints without curling, and define it as the **minimum fan speed threshold layer time**.
-   - Case 1: If the part prints successfully at **0% fan** down to **6 s layer time**, the material does not need cooling.
-   - Case 2: If **6 s layer time** fails but a layer time **≤ 30 s** succeeds, define the successful layer time as the **shortest printable layer time**.
-   - Case 3: If even **30 s layer time** fails, the material needs active cooling. Select the **long-layer-time cooling** model from the **process test 3MF** file and increase the fan in 10% steps until the **shortest printable layer time** is found.
-5. **Record**:
-   - Case 1: $Fan_{\text{max}} = 0\%$; $Fan_{\text{min}} = 0\%$; $Layer_{\text{min}} = 6\,\text{s}$ (standard value); $Layer_{\text{max}} = 100\,\text{s}$
-   - Case 2: $Fan_{\text{min}} = 0\%$; $Layer_{\text{min}} =$ shortest printable layer time
-   - Case 3: $Fan_{\text{min}} =$ fan speed at shortest printable layer time; $Layer_{\text{min}} =$ shortest printable layer time
-
-### Find Maximum Fan Speed and Layer-Time Threshold (6 s Check)
-
-1. **Model selection**: In the **process test 3MF** file, select the **short-layer-time cooling** model.
-2. **Fan settings**: Start from the fan speed found for the shortest printable layer time, and increase in 10% steps.
-3. **Preview check**: After slicing, confirm that the **fan**, **layer time**, and **temperature** settings match the intended values.
-4. **Observation and selection**: Follow the result of Section 6.1.
-   - Case 1: No maximum-fan test is needed.
-   - Case 2 and Case 3: Find the lowest fan speed that can print a **6 s layer time**.
-5. **Record**:
-   - Case 2: $Fan_{\text{max}} =$ lowest fan speed that can print a 6 s layer; $Layer_{\text{min}} = 6\,\text{s}$
-   - Case 3: $Fan_{\text{max}} =$ lowest fan speed that can print a 6 s layer; $Layer_{\text{min}} = 6\,\text{s}$
+5. **Find fan max and layer time max**: if the previous step ends in case 2 or case 3, keep increasing the fan in 10% steps, find the lowest fan speed that can print a **6 s layer time**. Record $Layer_{\text{max}} = 6\,\text{s}$ and $Fan_{\text{max}} =$ the corresponding fan speed.
 
 ---
 
