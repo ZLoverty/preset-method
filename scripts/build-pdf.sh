@@ -6,8 +6,26 @@ script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
 cd "$repo_root"
 
-: "${PDF_NAME:=polymaker-filament-preset-tuning-guide-local.pdf}"
+# Load PDF settings from .env without executing arbitrary shell code.
+# Explicit environment variables take precedence over values in .env.
+if test -f .env; then
+  while IFS= read -r setting; do
+    setting=$(printf '%s' "$setting" | sed 's/\r$//')
+    case "$setting" in
+      PDF_NAME=*)
+        test "${PDF_NAME+x}" = x || PDF_NAME=${setting#PDF_NAME=}
+        ;;
+      PDF_VERSION=*)
+        test "${PDF_VERSION+x}" = x || PDF_VERSION=${setting#PDF_VERSION=}
+        ;;
+    esac
+  done < .env
+fi
+
+: "${PDF_NAME:=polymaker-filament-preset-tuning-guide}"
 : "${PDF_VERSION:=local}"
+pdf_stem=${PDF_NAME%.pdf}
+pdf_output="${pdf_stem}-${PDF_VERSION}.pdf"
 
 for command in pandoc xelatex sed mktemp; do
   command -v "$command" >/dev/null 2>&1 || {
@@ -22,6 +40,8 @@ combined=$(mktemp)
 trap 'rm -f "$document_list" "$combined"' 0 1 2 15
 
 while IFS= read -r document; do
+  # Strip a possible carriage return when the manifest uses Windows line endings.
+  document=$(printf '%s' "$document" | sed 's/\r$//')
   case "$document" in
     ''|\#*) continue ;;
   esac
@@ -52,12 +72,12 @@ pandoc "$combined" \
   --metadata title="Polymaker Filament Preset Tuning Guide" \
   --metadata author="Polymaker" \
   --metadata date="Release ${PDF_VERSION}" \
-  --variable mainfont="Noto Serif" \
-  --variable CJKmainfont="Noto Serif CJK SC" \
+  --variable mainfont="Cambria" \
+  --variable CJKmainfont="SimSun" \
   --variable geometry:margin=3cm \
   --variable linestretch=1.2 \
   --variable fontsize=10.5pt \
-  --output "dist/${PDF_NAME}"
+  --output "dist/${pdf_output}"
 
-test -s "dist/${PDF_NAME}"
-echo "PDF generated: dist/${PDF_NAME}"
+test -s "dist/${pdf_output}"
+echo "PDF generated: dist/${pdf_output}"
