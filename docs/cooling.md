@@ -8,6 +8,7 @@
 - Most FDM 3D printers
 
 ![cooling-tower-ref](assets/cooling-abstract.png)
+
 ---
 
 ## Purpose
@@ -15,14 +16,10 @@
 1. Find the shortest printable layer time at different fan speeds.
 2. Use the result to set reasonable fan-threshold parameters ($Fan_{\text{min}}$, $Fan_{\text{max}}$, $Layer_{\text{min}}$, $Layer_{\text{max}}$) that reduce warping and improve accuracy and detail.
 
----
-
 ## Principle
 
 1. A 45° overhang pyramid printed at 50 mm/s is used to create a range of layer times. Fan power is then varied to find the minimum and maximum fan speeds and their corresponding layer times for the material.
 2. PLA (polylactic acid) is a semi-crystalline, low-glass-transition material ($T_g \approx 60^\circ C$). Unlike engineering plastics such as ABS or ASA, PLA needs rapid cooling after extrusion to solidify. Because PLA's $T_g$ is usually between 50 °C and 60 °C, insufficient cooling can soften the filament inside the heatbreak and cause a clog. At the same time, PLA keeps excellent interlayer bonding even with heavy cooling, so most manufacturers (including Bambu Lab) set the minimum fan speed to 100% or close to it by default. Therefore, cooling calibration for PLA only needs to find the maximum fan-speed threshold.
-
----
 
 ## Variable Definitions
 
@@ -35,14 +32,10 @@
 
 ![cooling-params-def](assets\cooling_params_def.png)
 
----
-
 ## Preparation
 
 1. Dry the filament thoroughly.
-2. Edit the filament profile: set the **nozzle temperature** to the highest printable temperature for the material, enable **keep fan always on**, disable **slow down print for better cooling**, and disable **force cooling for overhangs/bridges**.
-
----
+2. Edit the filament profile: set the **nozzle temperature** to the recommended nozzle temperature for the material, enable **keep fan always on**, disable **slow down print for better cooling**, and disable **force cooling for overhangs/bridges**.
 
 ## Procedure
 
@@ -77,8 +70,6 @@
 - Change one variable at a time (fan speed or layer time).
 - Keep raw data and conclusions well organized for traceability and profile deployment.
 - Use the results to optimize slicer fan parameters and layer-time strategy.
-
----
 
 ## Why 6 Seconds? (Background)
 
