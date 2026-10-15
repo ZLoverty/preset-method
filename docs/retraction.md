@@ -1,42 +1,38 @@
 # Retraction
 
+> Reference: [OrcaSlicer Wiki — Retraction Calibration](https://www.orcaslicer.com/wiki/calibration/retraction_calib.html)
+
 **Applicable to:**
 
 - All FDM printers.
 - All non-foaming thermoplastic materials.
 
+![Retraction test model slicer preview.](assets/retraction_ga.png)
+
+---
+
 ## Purpose
 
-Determine the best retraction distance for the material on the target printer and process settings. The goal is to find the value that minimizes stringing and oozing without retracting so far that it causes clogging or under-extrusion, so the printed parts have clean surface quality and the process stays stable.
+Determine the best retraction length value that minimizes stringing and oozing without retracting so far that it causes clogging or under-extrusion, so the printed parts have good surface quality and the process stays stable.
 
 ## Preparation
 
-1. Enable **Developer Mode** in the slicer preferences.
-2. Open the **Calibration** menu and select **Retraction Test**.
-3. Set `Start retraction distance` to 0, `End retraction distance` to 2 for direct drive or 6 for Bowden, and `Step` to 0.1.
-
----
+1. Dry the filament thorougly.
+2. Enable **Developer Mode** in the slicer preferences and ensure that **Calibration** menu shows up.
 
 ## Procedure
 
-### Test Flow
+1. **Model**: Open the **Calibration** menu and select **Retraction Test**.
+1. **Parameter setup**: 
+   - Set **Start retraction length** $d_{\text{start}}$ to 0, **End retraction length** $d_{\text{end}}$ to 2 for direct drive or 6 for Bowden, and **Step** $d_{\text{step}}$ to 0.1.
+   - Set temperature, cooling, maximum volumetric speed, and flow ratio according to previous calibration results.
+2. **Preview check**: After slicing, ensure that the temperature, cooling, print speed and flow ratio settings match the intended values.
+3. **Observe and record**: A good retraction length value should give the least stringing and no under-extrusion.   
+   - Find where the overall print quality is the best, and measure the height in mm (each step is 1 mm, so the height value in mm is equivalent to the step number $n$)
+   - Calculate **retraction length** $d_{\text{retract}}$:  
+   $d_{\text{retract}} = d_{\text{start}} + d_{\text{step}} \times n$, update the retration length in filament settings. 
 
-1. **Parameter setup**: Confirm that temperature, cooling, maximum volumetric speed, and flow ratio are already set from previous calibration results.
-2. **Print the model**: Print the Retraction Test.
-3. **Inspect the model**: Look at the towers or test pieces and find the height range with the least stringing and no under-extrusion.
-4. **Record**: Note the height index $n$ of the best-looking section (indices start at 0 from the bottom).
-5. **Calculate retraction distance**:  
-   $Retraction Distance = Start + Step \times n$
+## Process record
 
----
+- A picture of the printed retraction tower.
 
-## Archiving
-
-1. Mark the material name, test date, and the position / parameters of the best block on the test piece base with a marker.
-2. Keep the physical sample for later re-inspection.
-
----
-
-## Reference
-
-[OrcaSlicer Wiki — Retraction Calibration](https://github.com/OrcaSlicer/OrcaSlicer/wiki/retraction-calib)
