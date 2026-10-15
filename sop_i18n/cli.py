@@ -21,6 +21,11 @@ from .review import approve as approve_record
 from .review import reject as reject_record
 from .review import reopen as reopen_record
 from .validate import validate_translation
+from .context import extract_context
+from .jobs import jobs_payload, load_jobs, plan_jobs
+from .candidates import candidates_payload, load_candidates, parse_response
+from .qa import validate_candidate
+from .importer import import_drafts
 
 
 def _ast_args(parser: argparse.ArgumentParser) -> None:
@@ -182,6 +187,46 @@ def _glossary_check(args: argparse.Namespace) -> int:
     return 0 if not any(item.severity == "error" for item in issues) else 1
 
 
+def _translate_plan(args: argparse.Namespace) -> int:
+    ast, segments = _segments_from_source(args)
+    memory = TranslationMemory.load(args.memory)
+    glossary = Glossary.load(args.glossary)
+    jobs = plan_jobs(segments, memory, glossary, contexts=extract_context(ast, segments, max_neighbor_chars=args.max_neighbor_chars))
+    if args.out.exists() and not args.force: raise RuntimeError(f"Refusing to overwrite existing file: {args.out}")
+    save_json(args.out, jobs_payload(jobs))
+    print(json.dumps({"jobs": len(jobs), "occurrences": sum(len(item.occurrence_ids) for item in jobs)}, ensure_ascii=False, indent=2))
+    return 0
+
+
+def _translate_import_response(args: argparse.Namespace) -> int:
+    jobs = load_jobs(load_json(args.jobs)); response = load_json(args.response)
+    candidates = parse_response(response, jobs, provider=args.provider, model=args.model, prompt_version=args.prompt_version)
+    if args.out.exists() and not args.force: raise RuntimeError(f"Refusing to overwrite existing file: {args.out}")
+    save_json(args.out, candidates_payload(candidates)); print(json.dumps({"candidates": len(candidates)}, ensure_ascii=False, indent=2)); return 0
+
+
+def _translate_check(args: argparse.Namespace) -> int:
+    jobs = load_jobs(load_json(args.jobs)); candidates = load_candidates(load_json(args.candidates)); glossary = Glossary.load(args.glossary)
+    by_id = {job.job_id: job for job in jobs}; errors = []
+    for candidate in candidates:
+        issues = validate_candidate(candidate, by_id.get(candidate.job_id), glossary) if candidate.job_id in by_id else []
+        candidate.validation = {"status": "pass" if not any(item.severity == "error" for item in issues) else "fail", "issues": [item.to_dict() for item in issues]}
+        errors.extend(candidate.validation["issues"])
+    if args.out:
+        if args.out.exists() and not args.force: raise RuntimeError(f"Refusing to overwrite existing file: {args.out}")
+        save_json(args.out, candidates_payload(candidates))
+    print(json.dumps({"ok": not any(item.get("severity") == "error" for item in errors), "issues": errors}, ensure_ascii=False, indent=2))
+    return 0 if not any(item.get("severity") == "error" for item in errors) else 1
+
+
+def _translate_import_drafts(args: argparse.Namespace) -> int:
+    jobs = load_jobs(load_json(args.jobs)); candidates = load_candidates(load_json(args.candidates)); memory = TranslationMemory.load(args.memory); glossary = Glossary.load(args.glossary)
+    result = import_drafts(memory, jobs, candidates, glossary)
+    print(json.dumps(result.__dict__, ensure_ascii=False, indent=2))
+    if result.issues or result.conflicts: return 1
+    memory.save(args.memory); return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m sop_i18n")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -243,6 +288,17 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--glossary", type=Path, default=Path("i18n/glossary.json"))
     check.add_argument("--translations", type=Path, required=True)
     check.set_defaults(func=_glossary_check)
+
+    translate = sub.add_parser("translate", help="offline translation planning and candidate workflow")
+    translate_sub = translate.add_subparsers(dest="translate_command", required=True)
+    plan = translate_sub.add_parser("plan", help="generate deterministic translation jobs")
+    _ast_args(plan); plan.add_argument("--memory", type=Path, default=Path("i18n/memory/zh-CN.json")); plan.add_argument("--glossary", type=Path, default=Path("i18n/glossary.json")); plan.add_argument("--out", type=Path, required=True); plan.add_argument("--max-neighbor-chars", type=int, default=500); plan.add_argument("--force", action="store_true"); plan.set_defaults(func=_translate_plan)
+    response = translate_sub.add_parser("import-response", help="parse a strict provider response")
+    response.add_argument("--jobs", type=Path, required=True); response.add_argument("--response", type=Path, required=True); response.add_argument("--out", type=Path, required=True); response.add_argument("--provider", default="offline"); response.add_argument("--model"); response.add_argument("--prompt-version", default="zh-CN-v1"); response.add_argument("--force", action="store_true"); response.set_defaults(func=_translate_import_response)
+    quality = translate_sub.add_parser("check", help="locally validate candidate translations")
+    quality.add_argument("--jobs", type=Path, required=True); quality.add_argument("--candidates", type=Path, required=True); quality.add_argument("--glossary", type=Path, default=Path("i18n/glossary.json")); quality.add_argument("--out", type=Path); quality.add_argument("--force", action="store_true"); quality.set_defaults(func=_translate_check)
+    drafts = translate_sub.add_parser("import-drafts", help="atomically import validated candidates as drafts")
+    drafts.add_argument("--jobs", type=Path, required=True); drafts.add_argument("--candidates", type=Path, required=True); drafts.add_argument("--memory", type=Path, default=Path("i18n/memory/zh-CN.json")); drafts.add_argument("--glossary", type=Path, default=Path("i18n/glossary.json")); drafts.set_defaults(func=_translate_import_drafts)
     return parser
 
 
