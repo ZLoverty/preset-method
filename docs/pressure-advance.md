@@ -1,4 +1,6 @@
-# Pressure Advance (pressure-advance)
+# Pressure Advance
+
+> Reference: [OrcaSlicer Wiki — Pressure Advance Calibration](https://github.com/SoftFever/OrcaSlicer/wiki/pressure-advance-calib)
 
 **Applicable to:**
 
@@ -6,56 +8,54 @@
 - Flexible plastics (TPU, TPEE, etc.): use PA Pattern.
 - Only for printers and firmware that support Pressure Advance / K-Factor.
 
-## Purpose
-
-Determine the optimal Pressure Advance value for the material on the target printer and process settings. The result provides a reliable reference for building a preset library and enabling consistent production runs.
+![PA Tower slicer preview and printed.](assets/pa_ga.png)
 
 ---
 
+## Purpose
+
+Determine the optimal Pressure Advance value, mitigating under- / over-extrusion in acceleration / deceleration processes.
+
 ## Preparation
 
-1. Enable **Developer Mode** in the slicer preferences.
+1. Dry the filament thorougly.
+2. Enable **Developer Mode** in the slicer preferences and ensure that **Calibration** menu shows up.
+
+
+
 2. Open the **Calibration** menu and select **Pressure Advance Calibration**.
 3. Choose **PA Tower** for rigid filaments or **PA Pattern** for flexible filaments.
 4. Set `PA_start` to 0, `PA_end` to 1, and `PA_step` to 0.002.
 
 ## Procedure
 
-### Hard and Semi-Hard Materials (PA Tower)
+1. **Model**: Open the **Calibration** menu and select **Pressure Advance Calibration**.
+   - Rigid materials: choose **PA Tower**
+   - Flexible materials: choose **PA Line** or **PA Pattern**
+2. **Slicer settings**: 
+   - Set `PA_start` to 0, `PA_end` to 0.1, and `PA_step` to 0.002.
+   - Set temperature, cooling, maximum volumetric speed, and flow ratio based on previous calibration results.
+2. **Preview and check**: After slicing, ensure that temperature, cooling, print speed, and flow ratio match the intended values.
+3. **Observe and record**: 
+   - Rigid materials (tower method): 
+      - Examine the front corner and the back seam. The front corner should be close to a right angle and the transitions on both sides should look even. The back seam should be flat, without under-extrusion or over-extrusion;
+      - Find where the overall quality is the best,  measure the height in mm,  (in PA tower, each step is 1 mm, so the height value in mm is equivalent to the step number $n$);
+      - Calculate PA: $PA = PA_{\text{start}} + PA_{\text{step}} \times n$. Mark the calculated PA value on the test model, and update the PA value in filament settings.
+   - Flexible materials:
+      - Line method: Choose the value corresponding to the most even line and update the PA value in the filament settings.
+      - Pattern method: Choose the value corresponding to the most uniform pattern, with no breaks or bumps. Update the PA value in the filament settings.
 
-1. **Parameter setup**: Set temperature, cooling, maximum volumetric speed, and flow ratio based on previous calibration results.
-2. **Print the model**: Print the PA Tower.
-3. **Inspect the model**: Hold the tower up to a light and examine the front corners. Find the height where the corner is closest to a right angle and the transitions on both sides look even. Then check the back seam and find the height where it is flattest, without under-extrusion or over-extrusion.
-4. **Record**: Note the best front-corner height index $n_1$ and the best back-seam height index $n_2$ (indices start at 0 from the bottom).
-5. **Calculate PA**:  
-   $PA = PA_{start} + PA_{step} \times n$ (where $n$ is the test height / step index)
+## Process record
 
-### Flexible Plastics (PA Pattern)
+- Tower: a picture of the printed model back seam, with calculated PA value marked.
+- Line, pattern: a picture of the printed model.
 
-1. **Parameter setup**: Set temperature, cooling, maximum volumetric speed, and flow ratio based on previous calibration results.
-2. **Print the model**: Print the PA Pattern.
-3. **Inspect the model**: Choose the line that is most uniform, with no breaks or bumps.
-4. **Record**: Note the PA value for the best-performing region.
-
----
-
-## Archiving
-
-1. Mark the corresponding height on the test part with a marker.
-2. Keep the physical sample for later re-inspection.
-
----
-
-## Reference
-
-[OrcaSlicer Wiki — Pressure Advance Calibration](https://github.com/SoftFever/OrcaSlicer/wiki/pressure-advance-calib)
-
----
-
-## Figure
+## Examination reference
 
 ![Pressure advance measurement guide. The green gauge has a numbered scale on the left and a V-slot on the right. Red lines inside the V-slot correspond to positions 1, 2, 3, and 4. Lines 1, 2, and 3 align with the scale, while line 4 does not. This shows how to read the PA value from the V-slot alignment.](assets/pressure-advance-measurement.png)
 
 1. PA too low
 2. PA too high
 3. Best PA
+
+For Tower and Line examination references, see [OrcaSlicer Wiki — Pressure Advance Calibration](#pressure-advance) cited at the beginning of this section.
