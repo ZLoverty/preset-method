@@ -9,9 +9,17 @@ from pathlib import Path
 from typing import Any
 
 from .ast_io import load_json, parse_markdown, parse_ordered_markdown, save_json
+from .canonical import source_key
+from .coverage import coverage
+from .glossary import Glossary
 from .extract import extract_with_diagnostics, segments_to_json
+from .matching import resolve, synchronize
+from .memory import TranslationMemory
 from .models import Segment
 from .reconstruct import TranslationError, apply_translations
+from .review import approve as approve_record
+from .review import reject as reject_record
+from .review import reopen as reopen_record
 from .validate import validate_translation
 
 
@@ -82,6 +90,98 @@ def _validate(args: argparse.Namespace) -> int:
     return 0 if report.ok else 1
 
 
+def _segments_from_source(args: argparse.Namespace) -> tuple[dict[str, Any], list[Segment]]:
+    ast = _load(args)
+    segments, diagnostics = extract_with_diagnostics(ast, source_file=str(args.ast or args.markdown or args.order_file))
+    errors = [item for item in diagnostics if item.severity == "error"]
+    if errors:
+        raise RuntimeError("Source extraction failed: " + "; ".join(item.message for item in errors[:5]))
+    return ast, segments
+
+
+def _tm_status(args: argparse.Namespace) -> int:
+    _, segments = _segments_from_source(args)
+    memory = TranslationMemory.load(args.memory)
+    report = synchronize(segments, memory)
+    payload = coverage(report)
+    payload["obsolete_records"] = len(report.obsolete_record_ids)
+    payload["total_segments"] = len(segments)
+    payload["records"] = len(memory.records)
+    print(json.dumps(payload if not args.json else {**payload, "report": report.to_dict()}, ensure_ascii=False, indent=2))
+    return 0
+
+
+def _tm_sync(args: argparse.Namespace) -> int:
+    _, segments = _segments_from_source(args)
+    memory = TranslationMemory.load(args.memory)
+    report = synchronize(segments, memory)
+    if args.create_drafts:
+        by_id = {item.segment_id: item for item in segments}
+        for occurrence in report.occurrences:
+            if occurrence.status in {"MISSING", "CHANGED"}:
+                segment = by_id[occurrence.segment_id]
+                memory.create_draft(source_key=occurrence.source_key, source=segment.source_text, context=segment.context, occurrence_id=segment.segment_id, source_placeholders=[item.to_dict() for item in segment.placeholders])
+        memory.save(args.memory)
+    print(json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
+    return 0
+
+
+def _tm_resolve(args: argparse.Namespace) -> int:
+    _, segments = _segments_from_source(args)
+    memory = TranslationMemory.load(args.memory)
+    translations, issues = resolve(segments, memory, strict=not args.preview)
+    payload = {"ok": not issues, "translations": translations, "issues": [item.to_dict() for item in issues]}
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    if args.out and (not issues or args.preview):
+        if args.out.exists() and not args.force:
+            raise RuntimeError(f"Refusing to overwrite existing file: {args.out}")
+        save_json(args.out, translations)
+    return 0 if not issues else 1
+
+
+def _find_segment(args: argparse.Namespace, record_id: str) -> Segment:
+    _, segments = _segments_from_source(args)
+    memory = TranslationMemory.load(args.memory)
+    record = memory.find(record_id)
+    for segment in segments:
+        if segment.segment_id == record.occurrence_id or source_key(segment) == record.source_key:
+            return segment
+    raise RuntimeError(f"No current segment found for record {record_id}")
+
+
+def _tm_review(args: argparse.Namespace, operation: str) -> int:
+    memory = TranslationMemory.load(args.memory)
+    if operation == "update":
+        memory.update_target(args.record_id, args.target)
+    else:
+        segment = _find_segment(args, args.record_id)
+        if operation == "approve":
+            glossary = Glossary.load(args.glossary) if args.glossary else None
+            issues = approve_record(memory, args.record_id, segment, reviewer=args.reviewer, glossary=glossary, comment=args.comment)
+            if any(item.severity == "error" for item in issues):
+                print(json.dumps({"ok": False, "issues": [item.to_dict() for item in issues]}, ensure_ascii=False, indent=2))
+                return 1
+        elif operation == "reject":
+            reject_record(memory, args.record_id, reviewer=args.reviewer, comment=args.comment)
+        else:
+            reopen_record(memory, args.record_id, reviewer=args.reviewer, comment=args.comment)
+    memory.save(args.memory)
+    return 0
+
+
+def _glossary_check(args: argparse.Namespace) -> int:
+    _, segments = _segments_from_source(args)
+    glossary = Glossary.load(args.glossary)
+    translations = load_json(args.translations)
+    issues = []
+    for segment in segments:
+        target = translations.get(segment.segment_id)
+        if target is not None:
+            issues.extend(glossary.check(segment, target))
+    print(json.dumps({"ok": not any(item.severity == "error" for item in issues), "issues": [item.to_dict() for item in issues]}, ensure_ascii=False, indent=2))
+    return 0 if not any(item.severity == "error" for item in issues) else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m sop_i18n")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -105,6 +205,44 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("--translated", type=Path, required=True)
     validate.add_argument("--segments", type=Path, required=True)
     validate.set_defaults(func=_validate)
+
+    tm = sub.add_parser("tm", help="translation memory and review operations")
+    tm_sub = tm.add_subparsers(dest="tm_command", required=True)
+    for name, function, help_text in (("status", _tm_status, "show incremental translation coverage"), ("sync", _tm_sync, "synchronize source occurrences with TM"), ("resolve", _tm_resolve, "resolve approved translations")):
+        command = tm_sub.add_parser(name, help=help_text)
+        _ast_args(command)
+        command.add_argument("--memory", type=Path, default=Path("i18n/memory/zh-CN.json"))
+        if name == "status":
+            command.add_argument("--json", action="store_true")
+        elif name == "sync":
+            command.add_argument("--create-drafts", action="store_true")
+        else:
+            command.add_argument("--out", type=Path)
+            command.add_argument("--preview", action="store_true")
+            command.add_argument("--force", action="store_true")
+        command.set_defaults(func=function)
+
+    for name, function, help_text in (("approve", "approve", "approve a validated draft"), ("reject", "reject", "reject a draft"), ("reopen", "reopen", "reopen a rejected translation"), ("update", "update", "update a draft target")):
+        command = tm_sub.add_parser(name, help=help_text)
+        command.add_argument("--memory", type=Path, default=Path("i18n/memory/zh-CN.json"))
+        command.add_argument("--record-id", required=True)
+        command.add_argument("--reviewer", default="local")
+        command.add_argument("--comment")
+        if name in {"approve", "reject", "reopen"}:
+            _ast_args(command)
+        if name == "approve":
+            command.add_argument("--glossary", type=Path, default=Path("i18n/glossary.json"))
+        if name == "update":
+            command.add_argument("--target", required=True)
+        command.set_defaults(func=lambda args, operation=name: _tm_review(args, operation))
+
+    glossary = sub.add_parser("glossary", help="terminology review operations")
+    glossary_sub = glossary.add_subparsers(dest="glossary_command", required=True)
+    check = glossary_sub.add_parser("check", help="check translations against the glossary")
+    _ast_args(check)
+    check.add_argument("--glossary", type=Path, default=Path("i18n/glossary.json"))
+    check.add_argument("--translations", type=Path, required=True)
+    check.set_defaults(func=_glossary_check)
     return parser
 
 

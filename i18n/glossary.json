@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "language": "zh-CN",
+  "terms": [
+    {
+      "id": "flow-ratio",
+      "source": "Flow Ratio",
+      "target": "流量比",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "pressure-advance",
+      "source": "Pressure Advance",
+      "target": "压力提前量",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "preset",
+      "source": "preset",
+      "target": "预设",
+      "match_mode": "whole_word",
+      "severity": "warning"
+    },
+    {
+      "id": "max-volumetric-speed",
+      "source": "Max Volumetric Speed",
+      "target": "最大体积流量",
+      "match_mode": "phrase",
+      "severity": "warning"
+    }
+  ]
+}

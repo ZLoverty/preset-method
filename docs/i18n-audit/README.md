@@ -5,16 +5,14 @@
 
 ## Audit Result
 
-**PASS WITH WARNINGS**。仓库内容具备 Pandoc AST 翻译的技术基础；路径已统一到 `sop/`，Pandoc 解析阶段可通过。当前本机 XeLaTeX/MiKTeX 初始化失败，且发布 workflow 未在仓库中核验，因此正式 PDF 等价性和发布可复现性仍有条件。
+**PASS WITH WARNINGS**。仓库内容具备 Pandoc AST 翻译的技术基础；路径已统一到 `sop/`，Pandoc 解析和本地英文 PDF 构建均已通过。发布 workflow 未在仓库中核验，跨环境 PDF 可复现性仍有条件。
 
 ## Build Baseline
 
 - 目标格式：Pandoc + XeLaTeX PDF；没有发现 HTML/EPUB 构建配置。
 - 入口：`scripts/build-pdf.sh`；文档顺序文件实际为 `sop/pdf-order.txt`。
-- 路径修正后，脚本可读取 `sop/pdf-order.txt`、校验 `sop/*.md` 并进入 Pandoc/XeLaTeX 阶段。
-- 当前命令结果：XeLaTeX 失败，退出码 43。
-- 直接原因：MiKTeX 首次初始化需要写入用户目录，但当前环境拒绝创建
-  `C:\Users\zhengyang\AppData\Roaming\MiKTeX\2.9`。
+- 路径修正后，脚本可读取 `sop/pdf-order.txt`、校验 `sop/*.md` 并完成 Pandoc/XeLaTeX 构建。
+- 后续重试已成功生成 `dist/preset-method-v2.0-pre.pdf`。
 - `dist/` 中存在两个本地 PDF，但未发现它们由当前脚本成功生成，也不能据此宣称可复现。
 
 ## AST Findings
@@ -46,13 +44,13 @@
    - 证据：README 第 74–83 行引用 `.gitea/workflows/release-docs-pdf.yml`，当前仓库未发现 `.gitea/` 或 `.github/` 工作流。
    - 影响：官方构建、字体安装和 release 上传行为未知，无法满足“官方构建不得调用 AI”及可复现性要求。
    - 缓解：恢复/提交实际 workflow，固定 Pandoc/XeLaTeX/字体版本和容器 digest，并在 CI 中执行路径检查与 no-op build。
-2. **LaTeX/字体依赖未固定**：脚本硬编码 `Cambria`、`SimSun`，本机 XeLaTeX 初始化失败；不同 runner 的字体、TeX 包和元数据会改变 PDF。
+2. **LaTeX/字体依赖未固定**：脚本硬编码 `Cambria`、`SimSun`；不同 runner 的字体、TeX 包和元数据会改变 PDF。
 3. **源文档拼接会改变相对链接语境**：脚本把多个文件合并到临时文件后再解析；图片资源路径已改为 `sop`，但文档内部链接仍需在渲染环境中验证。
 4. **源文本存在质量信号**：发现重复编号、拼写错误、公式/单位中疑似编码乱码和若干文档内部链接；翻译系统应先把这些作为 source QA，而不是静默修复。
 
 ## P1 Readiness
 
-**READY WITH CONDITIONS**。P1 的 AST extractor、protected-content 和 validation 可以开始；正式接入官方构建前，需要固定 XeLaTeX/字体环境、核验发布 workflow，并完成一次可重复的英文 PDF 构建。
+**READY**。P1 的 AST extractor、protected-content、validation 和本地英文 PDF 构建均已验证。发布 workflow 和跨环境构建固定仍属于后续发布工程工作。
 
 ## Files Created
 

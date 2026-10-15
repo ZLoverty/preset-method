@@ -138,6 +138,85 @@ def validate_placeholder_tokens(text: str, placeholders: tuple[Placeholder, ...]
     return issues
 
 
+def rebind_translation(
+    text: str,
+    source_placeholders: list[dict[str, Any]] | None,
+    current_placeholders: tuple[Placeholder, ...],
+) -> tuple[str, list[Issue]]:
+    """Rebind TM placeholder numbers to the current segment's numbers.
+
+    Placeholder numbers are an encoding detail, so identity is matched by
+    kind and payload hash, with occurrence order disambiguating duplicates.
+    The operation fails closed when the source metadata is absent or the
+    protected structure changed.
+    """
+    if not current_placeholders:
+        return text, []
+    if not source_placeholders:
+        return text, [Issue(
+            "PLACEHOLDER_REBINDING_UNAVAILABLE",
+            "error",
+            "Approved translation has no source placeholder metadata",
+        )]
+
+    try:
+        old = tuple(Placeholder.from_dict(item) for item in source_placeholders)
+    except (KeyError, TypeError) as exc:
+        return text, [Issue("PLACEHOLDER_METADATA_INVALID", "error", str(exc))]
+
+    old_identity = [(item.kind, item.payload_hash) for item in old]
+    current_identity = [(item.kind, item.payload_hash) for item in current_placeholders]
+    if old_identity != current_identity:
+        return text, [Issue(
+            "PLACEHOLDER_IDENTITY_MISMATCH",
+            "error",
+            "Source and current placeholder identities or nesting order differ",
+        )]
+
+    # The sequence equality above also ensures that duplicate identities are
+    # paired deterministically by occurrence order.
+    token_map: dict[str, str] = {}
+    try:
+        for previous, current in zip(old, current_placeholders):
+            previous_open = _opening_token(previous.token)
+            current_open = _opening_token(current.token)
+            token_map[previous_open] = current_open
+            if previous.kind in {"format", "link", "image"}:
+                token_map[_closing_token(previous_open)] = _closing_token(current_open)
+    except ValueError as exc:
+        return text, [Issue("PLACEHOLDER_METADATA_INVALID", "error", str(exc))]
+
+    issues: list[Issue] = []
+
+    def replace(match: re.Match[str]) -> str:
+        closing, kind, index_text, opaque_index = match.groups()
+        old_token = _token("p", int(opaque_index)) if opaque_index else _token(kind, int(index_text), bool(closing))
+        replacement = token_map.get(old_token)
+        if replacement is None:
+            issues.append(Issue("PLACEHOLDER_TOKEN_UNMAPPED", "error", f"No current placeholder mapping for {old_token}"))
+            return match.group(0)
+        return replacement
+
+    rebound = TOKEN_RE.sub(replace, text)
+    return rebound, issues
+
+
+def _opening_token(token: str) -> str:
+    match = re.fullmatch(r"\[\[\[/?(fmt|link|image):(\d+)\]\]\]|\[\[\[p:(\d+)\]\]\]", token)
+    if not match:
+        raise ValueError(f"Invalid placeholder token: {token}")
+    if match.group(3):
+        return _token("p", int(match.group(3)))
+    return _token(match.group(1), int(match.group(2)))
+
+
+def _closing_token(opening: str) -> str:
+    match = re.fullmatch(r"\[\[\[(fmt|link|image):(\d+)\]\]\]", opening)
+    if not match:
+        raise ValueError(f"Not a scoped placeholder: {opening}")
+    return _token(match.group(1), int(match.group(2)), closing=True)
+
+
 def decode_translation(text: str, placeholders: tuple[Placeholder, ...]) -> tuple[list[dict[str, Any]] | None, list[Issue]]:
     issues = validate_placeholder_tokens(text, placeholders)
     if issues:
