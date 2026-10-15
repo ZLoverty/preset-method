@@ -1,12 +1,12 @@
 # Pipeline (the order defined in entry.md)
-docs/entry.md
-docs/bed-temperature.md
-docs/cooling.md
-docs/temperature-tower.md
-docs/max-volumetric-speed.md
-docs/flow-ratio.md
-docs/pressure-advance.md
-docs/retraction.md
+sop/entry.md
+sop/bed-temperature.md
+sop/cooling.md
+sop/temperature-tower.md
+sop/max-volumetric-speed.md
+sop/flow-ratio.md
+sop/pressure-advance.md
+sop/retraction.md
 # appendix
-docs/printer-calibration.md
-docs/base-preset-standard.md
+sop/printer-calibration.md
+sop/base-preset-standard.md

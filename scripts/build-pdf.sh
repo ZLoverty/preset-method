@@ -46,14 +46,14 @@ while IFS= read -r document; do
     ''|\#*) continue ;;
   esac
   test -f "$document" || {
-    echo "document listed in docs/pdf-order.txt does not exist: $document" >&2
+    echo "document listed in sop/pdf-order.txt does not exist: $document" >&2
     exit 1
   }
   printf '%s\n' "$document" >> "$document_list"
-done < docs/pdf-order.txt
+done < sop/pdf-order.txt
 
 test -s "$document_list" || {
-  echo "docs/pdf-order.txt does not contain any documents" >&2
+  echo "sop/pdf-order.txt does not contain any documents" >&2
   exit 1
 }
 
@@ -65,7 +65,7 @@ done < "$document_list"
 
 pandoc "$combined" \
   --from=markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+header_attributes-smart \
-  --resource-path=docs \
+  --resource-path=sop \
   --pdf-engine=xelatex \
   --toc \
   --number-sections \
