@@ -1,6 +1,6 @@
 # Pressure Advance
 
-> Reference: [OrcaSlicer Wiki — Pressure Advance Calibration](https://github.com/SoftFever/OrcaSlicer/wiki/pressure-advance-calib)
+> Reference: [OrcaSlicer Wiki — Pressure Advance Calibration](https://www.orcaslicer.com/wiki/calibration/pressure_advance_calib.html)
 
 **Applicable to:**
 
