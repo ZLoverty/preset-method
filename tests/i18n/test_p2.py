@@ -67,6 +67,18 @@ class P2Tests(unittest.TestCase):
         report = synchronize([original], memory)
         self.assertIn(obsolete.record_id, report.obsolete_record_ids)
 
+    def test_resolver_prefers_exact_occurrence_for_repeated_source(self) -> None:
+        first = extract_segments({"blocks": [paragraph("Notes"), paragraph("Notes")]})[0]
+        second = extract_segments({"blocks": [paragraph("Notes"), paragraph("Notes")]})[1]
+        memory = TranslationMemory.empty()
+        first_record = memory.create_draft(source_key=source_key(first), source=first.source_text, target="第一处", occurrence_id=first.segment_id)
+        second_record = memory.create_draft(source_key=source_key(second), source=second.source_text, target="第二处", occurrence_id=second.segment_id)
+        first_record.status = second_record.status = "approved"
+        translations, issues = resolve([first, second], memory)
+        self.assertFalse(issues)
+        self.assertEqual(translations[first.segment_id], "第一处")
+        self.assertEqual(translations[second.segment_id], "第二处")
+
     def test_atomic_json_storage_and_idempotent_drafts(self) -> None:
         segment = extract_segments({"blocks": [paragraph("New")]})[0]
         with tempfile.TemporaryDirectory() as directory:

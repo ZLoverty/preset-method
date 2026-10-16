@@ -5,7 +5,7 @@
     {
       "id": "flow-ratio",
       "source": "Flow Ratio",
-      "target": "流量比",
+      "target": "流量比例",
       "match_mode": "phrase",
       "severity": "warning"
     },
@@ -26,7 +26,98 @@
     {
       "id": "max-volumetric-speed",
       "source": "Max Volumetric Speed",
-      "target": "最大体积流量",
+      "target": "最大体积速度",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-speed",
+      "source": "speed",
+      "target": "速度",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-model",
+      "source": "model",
+      "target": "模型",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-cooling",
+      "source": "cooling",
+      "target": "冷却",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-filament",
+      "source": "filament",
+      "target": "线材",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-record",
+      "source": "record",
+      "target": "记录",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-calibration",
+      "source": "calibration",
+      "target": "校准",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-volumetric",
+      "source": "volumetric",
+      "target": "体积",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-bed-temperature",
+      "source": "bed temperature",
+      "target": "热床温度",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-retraction-length",
+      "source": "retraction length",
+      "target": "回抽距离",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-process-record",
+      "source": "process record",
+      "target": "过程记录",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-nozzle-temperature",
+      "source": "nozzle temperature",
+      "target": "喷嘴温度",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-match-the-intended-values",
+      "source": "match the intended values",
+      "target": "符合预期",
+      "match_mode": "phrase",
+      "severity": "warning"
+    },
+    {
+      "id": "term-over-extrusion",
+      "source": "over-extrusion",
+      "target": "过量挤出",
       "match_mode": "phrase",
       "severity": "warning"
     }

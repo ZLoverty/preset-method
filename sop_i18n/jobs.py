@@ -34,6 +34,7 @@ class TranslationJob:
     occurrence_ids: list[str] = field(default_factory=list)
     previous_translation: str | None = None
     prompt_version: str = POLICY_VERSION
+    node_type: str = "Para"
 
     def to_dict(self) -> dict[str, Any]:
         return {"schema_version": SCHEMA_VERSION, **self.__dict__}
@@ -42,7 +43,7 @@ class TranslationJob:
     def from_dict(cls, value: dict[str, Any]) -> "TranslationJob":
         if value.get("schema_version") != SCHEMA_VERSION:
             raise ValueError("Unsupported translation job schema version")
-        allowed = {"job_id", "language", "source_key", "segment_id", "source_text", "context", "glossary", "source_placeholders", "occurrence_ids", "previous_translation", "prompt_version"}
+        allowed = {"job_id", "language", "source_key", "segment_id", "source_text", "context", "glossary", "source_placeholders", "occurrence_ids", "previous_translation", "prompt_version", "node_type"}
         if set(value) - ({"schema_version"} | allowed):
             raise ValueError("Unknown translation job fields")
         return cls(**{key: value[key] for key in allowed if key in value})
@@ -71,7 +72,7 @@ def plan_jobs(segments: list[Segment], memory: TranslationMemory, glossary: Glos
             continue
         candidates = memory.candidates(occurrence.source_key, segment.context, memory.language)
         previous = next((item.target for item in candidates if item.status == "approved" and item.target), None)
-        groups[job_id] = TranslationJob(job_id, memory.language, occurrence.source_key, segment.segment_id, segment.source_text, context, relevant, [item.to_dict() for item in segment.placeholders], [segment.segment_id], previous)
+        groups[job_id] = TranslationJob(job_id, memory.language, occurrence.source_key, segment.segment_id, segment.source_text, context, relevant, [item.to_dict() for item in segment.placeholders], [segment.segment_id], previous, node_type=segment.node_type)
     return [groups[key] for key in sorted(groups)]
 
 

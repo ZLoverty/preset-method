@@ -59,7 +59,12 @@ def resolve(segments: list[Segment], memory: TranslationMemory, *, strict: bool 
     for segment in segments:
         key = source_key(segment)
         candidates = memory.candidates(key, segment.context, memory.language)
-        approved = [record for record in candidates if record.status == "approved" and record.target]
+        # Occurrence-specific records take precedence. Repeated source text
+        # may legitimately have two approved records with different targets;
+        # that is only ambiguous when there is no exact occurrence match.
+        exact = [record for record in candidates if record.occurrence_id == segment.segment_id]
+        pool = exact or candidates
+        approved = [record for record in pool if record.status == "approved" and record.target]
         if len(approved) != 1:
             code = "MISSING_TRANSLATION" if not approved else "AMBIGUOUS_TRANSLATION"
             issues.append(Issue(code, "error", f"Expected one approved translation, found {len(approved)}", segment.ast_path, segment.segment_id))

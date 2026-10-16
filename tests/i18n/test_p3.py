@@ -35,6 +35,12 @@ class P3Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_response({"schema_version": 1, "translations": [{"job_id": "unknown", "target": "x"}]}, jobs)
 
+    def test_qa_ignores_placeholder_indices_when_comparing_numbers(self) -> None:
+        ast = {"blocks": [{"t": "Para", "c": [{"t": "Str", "c": "Set 0, 2 or 6."}]}]}
+        jobs = plan_jobs(extract_segments(ast), TranslationMemory.empty(), Glossary("zh-CN", []))
+        candidates = parse_response({"schema_version": 1, "translations": [{"job_id": jobs[0].job_id, "target": "设置 0、2 或 6。"}]}, jobs)
+        self.assertFalse([item for item in validate_candidate(candidates[0], jobs[0], Glossary("zh-CN", [])) if item.code == "NUMBER_UNIT_MISMATCH"])
+
 
 if __name__ == "__main__":
     unittest.main()
