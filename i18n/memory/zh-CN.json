@@ -2992,6 +2992,24 @@
       "review_comment": "Batch approval of validated candidates"
     },
     {
+      "record_id": "tm_48fd53f884d5d904e69e",
+      "language": "zh-CN",
+      "source_key": "sha256:5dc82f4bf655e24005f31c9e78706a185b32cce00e0c541dd708b41ae4b7109e",
+      "source": "Flexible: watch belt, tire and muscle man",
+      "target": "柔性：表带、轮胎和肌肉人",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-7e02e528afecd333f85e",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:11:25Z",
+      "updated_at": "2026-10-19T01:11:25Z",
+      "reviewed_at": "2026-10-19T01:11:25Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_4922860e077291609bde",
       "language": "zh-CN",
       "source_key": "sha256:629c37f0a97d3d2e7179d2d48be5d8b3564b9034a66043427184514f939f22df",
@@ -3456,6 +3474,24 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_5413ae7d31b6f18ac54d",
+      "language": "zh-CN",
+      "source_key": "sha256:c7a18730a5b5bc22faba05167b79c1e30677c8dd0b07a4fc1dc90d5f3a056c56",
+      "source": "Validation Framework",
+      "target": "验证框架",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-79ee3e1480713b15e799",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:10:28Z",
+      "updated_at": "2026-10-19T01:10:28Z",
+      "reviewed_at": "2026-10-19T01:10:28Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_542c783ae1545968e371",
       "language": "zh-CN",
       "source_key": "sha256:4354ddc5555859f804819a4452ae35f1cc8cce6342611f64d47d302e4bc48c7e",
@@ -3505,6 +3541,24 @@
       "reviewed_at": "2026-10-15T09:05:14Z",
       "reviewer": "batch-approve",
       "review_comment": "Batch approval of validated candidates"
+    },
+    {
+      "record_id": "tm_54dfa9c219b84ff41e7e",
+      "language": "zh-CN",
+      "source_key": "sha256:6c108bb5d7dbd5567591a55e22fc30f78c7fd2490abb6094d36bbbb47c77ea43",
+      "source": "2. Principles",
+      "target": "2. 原则",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-3c6c7f9a9c6f236747b6",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:10:47Z",
+      "updated_at": "2026-10-19T01:10:47Z",
+      "reviewed_at": "2026-10-19T01:10:47Z",
+      "reviewer": "local-ui",
+      "review_comment": null
     },
     {
       "record_id": "tm_57746bc599e1abaf874e",
@@ -4038,6 +4092,47 @@
       "review_comment": "Batch approval of validated candidates"
     },
     {
+      "record_id": "tm_6728c28d4d3d0744461f",
+      "language": "zh-CN",
+      "source_key": "sha256:4f29ac3476b876cbdd0f0d72990dcf755c55d1da31d710c82981a75aad5e56d5",
+      "source": "[[[image:0]]]Key-shaped model for bed temperature test. Top: model preview in slicer; bottom: curling at different bed temperatures.[[[/image:0]]]",
+      "target": "[[[image:0]]]用于热床温度测试的钥匙模型。上：切片软件中的模型预览；下：不同热床温度下的翘曲。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-64a4c91849586fdf57e3",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "6c5990d1478c9a7c72b63737ccfa32a601db19df115fc7068d42880eb755d897",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/bed-temperature-abstract.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:10:45Z",
+      "updated_at": "2026-10-19T01:10:45Z",
+      "reviewed_at": "2026-10-19T01:10:45Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_675c6dd48db23f01f7e1",
       "language": "zh-CN",
       "source_key": "sha256:87af9ff28bb951442d1ed7b921e574892f1347eda44560095dc98527f75c8383",
@@ -4054,6 +4149,24 @@
       "reviewed_at": "2026-10-15T09:05:14Z",
       "reviewer": "batch-approve",
       "review_comment": "Batch approval of validated candidates"
+    },
+    {
+      "record_id": "tm_67d8702bb07c8241aed1",
+      "language": "zh-CN",
+      "source_key": "sha256:33deb62c4fe51b9778ad6402b3997eae8281a57ae1ab6f4dc4c0ce1996778550",
+      "source": "3. Models",
+      "target": "3. 模型",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-ec1e67ccea1c1385f8a1",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:11:28Z",
+      "updated_at": "2026-10-19T01:11:28Z",
+      "reviewed_at": "2026-10-19T01:11:28Z",
+      "reviewer": "local-ui",
+      "review_comment": null
     },
     {
       "record_id": "tm_68bee97f9cab524c197e",
@@ -4203,6 +4316,24 @@
       "created_at": "2026-10-15T09:02:43Z",
       "updated_at": "2026-10-15T09:02:43Z",
       "reviewed_at": "2026-10-15T09:02:43Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
+      "record_id": "tm_6be81016cd1c1f51f568",
+      "language": "zh-CN",
+      "source_key": "sha256:bc12edc2140bb4059ab682546fa469246177e384c9a9f7585b744929f0ea7764",
+      "source": "The models for tuning preset parameters are generally simple (not necessarily easy to print, but lack of combinations of hard-to-print features that can cause issues). To check if a set of parameters in realistic settings, we need to print a few more complex and application-oriented models. This step is more of a \"final exam\" for a preset. It does not yield any parameters directly, but potentially reveals parameters we have overlooked.",
+      "target": "用于调整预设参数的模型通常较为简单（不一定易于打印，但缺乏可能引发问题的难打印特征组合）。为了检验一组参数在真实场景下的表现，我们需要打印几个更复杂且面向应用的模型。此步骤更像是针对预设的“期末考试”。它不会直接产出任何参数，但有可能揭示我们此前忽略的参数。",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-c137bbea906d625bda36",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:11:15Z",
+      "updated_at": "2026-10-19T01:11:15Z",
+      "reviewed_at": "2026-10-19T01:11:15Z",
       "reviewer": "local-ui",
       "review_comment": null
     },
@@ -4638,6 +4769,24 @@
       "created_at": "2026-10-15T06:37:32Z",
       "updated_at": "2026-10-15T06:37:32Z",
       "reviewed_at": "2026-10-15T06:37:32Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
+      "record_id": "tm_7abdbe89b6f7a0bedcd4",
+      "language": "zh-CN",
+      "source_key": "sha256:28596c9a9699580f5bb223dec82d3bba7fbc6064312b99916a4ccdae5031a980",
+      "source": "1. Purpose",
+      "target": "1. 目的",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-1c79aea31c9b67fa473a",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:09:58Z",
+      "updated_at": "2026-10-19T01:09:58Z",
+      "reviewed_at": "2026-10-19T01:09:58Z",
       "reviewer": "local-ui",
       "review_comment": null
     },
@@ -6507,6 +6656,24 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_a88776898ac6fa2e953d",
+      "language": "zh-CN",
+      "source_key": "sha256:3953294fd865ef435c1a5f3c12bbb1b6e775b5449cd33b98b5057661627dd3e9",
+      "source": "Required: 3DBenchy and Autodesk FDM Test",
+      "target": "必需：小船和欧特克综合模型",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-66ba9be156ae21078b4e",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:10:25Z",
+      "updated_at": "2026-10-19T01:10:25Z",
+      "reviewed_at": "2026-10-19T01:10:25Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_aa272de64e207dfa89be",
       "language": "zh-CN",
       "source_key": "sha256:bc10bb075a2ddf66e631e64117ab7b99c8125bc57fd6a0932bb25637138ebc9b",
@@ -7089,6 +7256,24 @@
       "created_at": "2026-10-15T09:03:22Z",
       "updated_at": "2026-10-15T09:03:22Z",
       "reviewed_at": "2026-10-15T09:03:22Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
+      "record_id": "tm_bd85bc81201e6ef09ba9",
+      "language": "zh-CN",
+      "source_key": "sha256:94038b42cc1fc9b87cb469cf6e43e1e9a1fde0d68e9f6ff76fee68dc8cda8436",
+      "source": "Recommended:",
+      "target": "推荐：",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-81a36754e931c6eb7727",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:11:42Z",
+      "updated_at": "2026-10-19T01:11:42Z",
+      "reviewed_at": "2026-10-19T01:11:42Z",
       "reviewer": "local-ui",
       "review_comment": null
     },
@@ -7722,6 +7907,33 @@
       "created_at": "2026-10-15T06:34:15Z",
       "updated_at": "2026-10-15T06:34:15Z",
       "reviewed_at": "2026-10-15T06:34:15Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
+      "record_id": "tm_d3a2eccc5482e40da5cd",
+      "language": "zh-CN",
+      "source_key": "sha256:98e7e6ec89b66ddbce13e147ccfe04a995fbc8608b73cc5c4d0080d95eb84324",
+      "source": "Optional: see [[[fmt:0]]]model library[[[/fmt:0]]] for more models (expanding based on R&D projects), with various hard-to-print features. It is recommended to define \"printability\" requirement of a product with one or a set of these validation models in the Product Requirements Document (PRD), so that both formulation development and preset development have a clear target.",
+      "target": "可选：参见[[[fmt:0]]]模型库[[[/fmt:0]]]以获取更多模型（基于研发项目不断扩充），其中包含各种难打印特征。建议在产品需求文档（PRD）中，用一个或一组此类验证模型来定义产品的“可打印性”要求，以便配方开发和预设开发都有明确的目标。",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-d9b31e44b987e632169b",
+      "source_placeholders": [
+        {
+          "token": "[[[fmt:0]]]",
+          "kind": "format",
+          "payload_hash": "53b1fd889bd866d5b21c26ca3f546870658d50d0909805ae0856a01796853d91",
+          "payload": {
+            "t": "Strong"
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:11:40Z",
+      "updated_at": "2026-10-19T01:11:40Z",
+      "reviewed_at": "2026-10-19T01:11:40Z",
       "reviewer": "local-ui",
       "review_comment": null
     },
@@ -8400,6 +8612,24 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_e1318a33c76162da31b0",
+      "language": "zh-CN",
+      "source_key": "sha256:950650dcdd5cac95774587a20da156109de59b0ea90750117a6b900957ca7883",
+      "source": "The goal is to validate the preset parameters produced with this SOP by printing a few more complex and application-oriented models.",
+      "target": "目标是通过打印几个更复杂且面向应用的模型，来验证依据本 SOP 生成的预设参数。",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-dd5e08e896b2234cf255",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:09:53Z",
+      "updated_at": "2026-10-19T01:09:53Z",
+      "reviewed_at": "2026-10-19T01:09:53Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_e22bc9ee286cdbe611ff",
       "language": "zh-CN",
       "source_key": "sha256:20349248c42445e7965c32ca0e4410cdf90e9b7bbe37977db97470c2a34d3375",
@@ -8433,6 +8663,24 @@
       "reviewed_at": "2026-10-15T09:05:14Z",
       "reviewer": "batch-approve",
       "review_comment": "Batch approval of validated candidates"
+    },
+    {
+      "record_id": "tm_e2e623b5f1e28c2753c5",
+      "language": "zh-CN",
+      "source_key": "sha256:ad52dba8c97b43de1b78a57c31665b4b45394ac9f597411e2a586c07c3736ec0",
+      "source": "Engineering: large cube, Orca cube",
+      "target": "工程：大立方体、Orca 方块",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-f70ec4b1e0d961893ab5",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T01:11:56Z",
+      "updated_at": "2026-10-19T01:11:56Z",
+      "reviewed_at": "2026-10-19T01:11:56Z",
+      "reviewer": "local-ui",
+      "review_comment": null
     },
     {
       "record_id": "tm_e40568151714ec7510d5",

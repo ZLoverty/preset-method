@@ -78,6 +78,7 @@ class OpenAIProvider:
         self.api_key = api_key or os.environ.get("OPENAI_API_KEY") or os.environ.get("API_KEY") or _dotenv_value(dotenv_path, ("OPENAI_API_KEY", "API_KEY"))
         if not self.api_key: raise ProviderError("OPENAI_API_KEY is not set")
         self.endpoint = endpoint
+        self.chat_completions = endpoint.rstrip("/").endswith("/chat/completions")
         self.prompt_path = prompt_path
         self.prompt_version = prompt_version
         self.timeout = timeout
@@ -90,7 +91,10 @@ class OpenAIProvider:
     def _request_body(self, jobs: list[TranslationJob]) -> dict[str, Any]:
         policy = self.prompt_path.read_text(encoding="utf-8")
         payload = [{"job_id": job.job_id, "source_key": job.source_key, "source_text": job.source_text, "source_placeholders": job.source_placeholders, "context": job.context, "glossary": job.glossary, "previous_translation": job.previous_translation} for job in jobs]
-        return {"model": self.model, "instructions": policy, "input": json.dumps({"target_language": "zh-CN", "prompt_version": self.prompt_version, "jobs": payload}, ensure_ascii=False), "text": {"format": {"type": "json_schema", "name": "translation_response", "strict": True, "schema": RESPONSE_SCHEMA}}}
+        task = json.dumps({"target_language": "zh-CN", "prompt_version": self.prompt_version, "jobs": payload}, ensure_ascii=False)
+        if self.chat_completions:
+            return {"model": self.model, "messages": [{"role": "system", "content": policy}, {"role": "user", "content": task}], "response_format": {"type": "json_object"}}
+        return {"model": self.model, "instructions": policy, "input": task, "text": {"format": {"type": "json_schema", "name": "translation_response", "strict": True, "schema": RESPONSE_SCHEMA}}}
 
     def _call(self, body: dict[str, Any]) -> dict[str, Any]:
         request = urllib.request.Request(self.endpoint, data=json.dumps(body, ensure_ascii=False).encode("utf-8"), headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}, method="POST")
@@ -98,14 +102,15 @@ class OpenAIProvider:
             response = self.transport(request, timeout=self.timeout)
             raw = response.read()
             status = getattr(response, "status", 200)
-            if status >= 400: raise ProviderError(f"OpenAI API HTTP {status}", retryable=status in {429, 500, 502, 503, 504}, status=status)
+            if status >= 400: raise ProviderError(f"OpenAI API HTTP {status}: {self._error_detail(raw)}", retryable=status in {429, 500, 502, 503, 504}, status=status)
             return json.loads(raw.decode("utf-8"))
         except urllib.error.HTTPError as exc:
             retryable = exc.code in {429, 500, 502, 503, 504}
             retry_after = None
             try: retry_after = float(exc.headers.get("Retry-After")) if exc.headers.get("Retry-After") else None
             except (TypeError, ValueError): pass
-            raise ProviderError(f"OpenAI API HTTP {exc.code}", retryable=retryable, status=exc.code, retry_after=retry_after) from exc
+            detail = self._error_detail(exc.read())
+            raise ProviderError(f"OpenAI API HTTP {exc.code}: {detail}", retryable=retryable, status=exc.code, retry_after=retry_after) from exc
         except urllib.error.URLError as exc:
             raise ProviderError(f"OpenAI network error: {exc.reason}", retryable=True) from exc
         except json.JSONDecodeError as exc:
@@ -114,12 +119,58 @@ class OpenAIProvider:
     @staticmethod
     def _output_text(response: dict[str, Any]) -> str:
         if isinstance(response.get("output_text"), str): return response["output_text"]
+        choices = response.get("choices", [])
+        if choices and isinstance(choices[0], dict):
+            content = choices[0].get("message", {}).get("content")
+            if isinstance(content, str): return content
+            if isinstance(content, list):
+                return "".join(item.get("text", "") for item in content if isinstance(item, dict))
         chunks: list[str] = []
         for item in response.get("output", []):
             for content in item.get("content", []):
                 if content.get("type") in {"output_text", "text"} and isinstance(content.get("text"), str): chunks.append(content["text"])
         if not chunks: raise ProviderError("OpenAI response contained no output text")
         return "".join(chunks)
+
+    @staticmethod
+    def _error_detail(raw: bytes) -> str:
+        try:
+            payload = json.loads(raw.decode("utf-8"))
+            error = payload.get("error", payload) if isinstance(payload, dict) else payload
+            if isinstance(error, dict):
+                return str(error.get("message") or error.get("detail") or error)[:500]
+            return str(error)[:500]
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            return raw.decode("utf-8", errors="replace")[:500] or "unknown error"
+
+    @staticmethod
+    def _parse_json_text(text: str) -> dict[str, Any]:
+        text = text.strip()
+        if text.startswith("```") and text.endswith("```"):
+            lines = text.splitlines()
+            text = "\n".join(lines[1:-1]).strip()
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise ProviderError("Translation response was not valid JSON", retryable=False) from exc
+        if not isinstance(payload, dict):
+            raise ProviderError("Translation response must be a JSON object", retryable=False)
+        translations = payload.get("translations")
+        if isinstance(translations, list):
+            # Chat-completions providers only guarantee JSON mode, not the
+            # Responses API's strict schema. Keep the two required fields and
+            # let parse_response perform the authoritative job-ID validation.
+            normalized = []
+            for item in translations:
+                if isinstance(item, dict) and "job_id" in item and "target" in item:
+                    normalized.append({"job_id": item["job_id"], "target": item["target"]})
+                elif isinstance(item, dict) and "job_id" in item:
+                    alias = next((name for name in ("translation", "translated_text", "text", "content") if name in item), None)
+                    normalized.append({"job_id": item["job_id"], "target": item[alias]} if alias else item)
+                else:
+                    normalized.append(item)
+            payload["translations"] = normalized
+        return payload
 
     def translate(self, jobs: list[TranslationJob]) -> list[TranslationCandidate]:
         if not jobs: return []
@@ -130,10 +181,10 @@ class OpenAIProvider:
             try:
                 response = self._call(body)
                 if response.get("status") in {"failed", "cancelled", "incomplete"}: raise ProviderError("OpenAI response was incomplete", retryable=False)
-                raw = json.loads(self._output_text(response))
+                raw = self._parse_json_text(self._output_text(response))
                 candidates = parse_response(raw, jobs, provider=self.name, model=self.model, prompt_version=self.prompt_version)
                 usage = response.get("usage", {})
-                self.usage.input_tokens += int(usage.get("input_tokens", 0) or 0); self.usage.output_tokens += int(usage.get("output_tokens", 0) or 0); self.usage.total_tokens += int(usage.get("total_tokens", 0) or 0)
+                self.usage.input_tokens += int(usage.get("input_tokens", usage.get("prompt_tokens", 0)) or 0); self.usage.output_tokens += int(usage.get("output_tokens", usage.get("completion_tokens", 0)) or 0); self.usage.total_tokens += int(usage.get("total_tokens", 0) or 0)
                 self.usage.successful_requests += 1; self.usage.elapsed_seconds += time.monotonic() - started
                 return candidates
             except ProviderError as exc:

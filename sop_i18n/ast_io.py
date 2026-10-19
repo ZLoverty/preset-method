@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-READER = "markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+header_attributes-smart"
+READER = "markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+link_attributes+header_attributes-smart"
 
 
 def load_json(path: Path) -> dict[str, Any]:

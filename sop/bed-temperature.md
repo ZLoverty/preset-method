@@ -5,7 +5,7 @@
 - Warp-prone engineering plastics (ABS, PA, PC, etc.)
 - All printers
 
-![Key-shaped model for bed temperature test. Top: model preview in slicer; bottom: curling at different bed temperatures.](assets/bed-temperature-abstract.png)
+![Key-shaped model for bed temperature test. Top: model preview in slicer; bottom: curling at different bed temperatures.](assets/bed-temperature-abstract.png){height=3in}
 
 ---
 

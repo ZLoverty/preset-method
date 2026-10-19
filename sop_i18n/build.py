@@ -16,7 +16,7 @@ from .models import Issue
 from .reconstruct import TranslationError, apply_translations
 from .validate import validate_translation
 
-READER = "markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+header_attributes-smart"
+READER = "markdown+pipe_tables+strikeout+task_lists+autolink_bare_uris+tex_math_dollars+raw_tex+raw_attribute+link_attributes+header_attributes-smart"
 CHINESE_TITLE = "Polymaker 耗材预设调校指南"
 CHINESE_TOC_TITLE = "目录"
 

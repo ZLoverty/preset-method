@@ -20,9 +20,12 @@ def parse_response(payload: dict[str, Any], jobs: list[TranslationJob], *, provi
     if payload.get("schema_version") != SCHEMA_VERSION or not isinstance(payload.get("translations"), list):
         raise ValueError("Invalid translation response schema")
     by_id = {job.job_id: job for job in jobs}; seen: set[str] = set(); result = []
-    for item in payload["translations"]:
+    for index, item in enumerate(payload["translations"]):
+        if not isinstance(item, dict):
+            raise ValueError(f"Translation item {index} must be an object")
         if set(item) != {"job_id", "target"} or not isinstance(item["target"], str):
-            raise ValueError("Translation responses require exactly job_id and target")
+            keys = ", ".join(sorted(item)) or "<none>"
+            raise ValueError(f"Translation item {index} requires exactly job_id and target; received keys: {keys}")
         job_id = item["job_id"]
         if job_id not in by_id: raise ValueError(f"Unknown job ID: {job_id}")
         if job_id in seen: raise ValueError(f"Duplicate job ID: {job_id}")

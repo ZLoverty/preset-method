@@ -36,6 +36,19 @@ class P31Tests(unittest.TestCase):
         request_body = json.loads(calls[0][0].data.decode("utf-8"))
         self.assertEqual(request_body["text"]["format"]["type"], "json_schema")
 
+    def test_chat_completions_endpoint_uses_chat_schema(self) -> None:
+        ast = {"blocks": [{"t": "Para", "c": [{"t": "Str", "c": "Set 220 C."}]}]}
+        jobs = plan_jobs(extract_segments(ast), TranslationMemory.empty(), Glossary("zh-CN", []))
+        calls = []
+        def transport(request, timeout):
+            calls.append(json.loads(request.data.decode("utf-8")))
+            return FakeResponse({"choices": [{"message": {"content": json.dumps({"schema_version": 1, "translations": [{"job_id": jobs[0].job_id, "translated_text": "设置 220 C。", "source_key": "model-added-metadata"}]})}}], "usage": {"prompt_tokens": 10, "completion_tokens": 8, "total_tokens": 18}})
+        provider = OpenAIProvider(model="deepseek-chat", api_key="test", endpoint="https://api.deepseek.com/v1/chat/completions", prompt_path=Path("i18n/prompts/zh-CN-v1.txt"), transport=transport, max_retries=0)
+        candidates = provider.translate(jobs)
+        self.assertEqual(candidates[0].target, "设置 220 C。")
+        self.assertIn("messages", calls[0])
+        self.assertEqual(calls[0]["response_format"]["type"], "json_object")
+
     def test_partition_and_resume_skip_completed_batch(self) -> None:
         ast = {"blocks": [{"t": "Para", "c": [{"t": "Str", "c": "Set 220 °C."}]}]}
         jobs = plan_jobs(extract_segments(ast), TranslationMemory.empty(), Glossary("zh-CN", []))
