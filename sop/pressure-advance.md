@@ -52,7 +52,7 @@ Determine the optimal Pressure Advance value, mitigating under- / over-extrusion
 
 ## Examination reference
 
-![Pressure advance measurement guide. The green gauge has a numbered scale on the left and a V-slot on the right. Red lines inside the V-slot correspond to positions 1, 2, 3, and 4. Lines 1, 2, and 3 align with the scale, while line 4 does not. This shows how to read the PA value from the V-slot alignment.](assets/pressure-advance-measurement.png)
+![Pressure advance measurement guide. The green gauge has a numbered scale on the left and a V-slot on the right. Red lines inside the V-slot correspond to positions 1, 2, 3, and 4. Lines 1, 2, and 3 align with the scale, while line 4 does not. This shows how to read the PA value from the V-slot alignment.](assets/pressure-advance-measurement.png){height=3in}
 
 1. PA too low
 2. PA too high

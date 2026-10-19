@@ -6,7 +6,7 @@
 - Most 3D printers
 - Printers with Sparse infill acceleration $\ge 3000\;\text{mm/s}^2$
 
-![Max volumetric speed test model slicer previews.](assets/mvs-ga.png)
+![Max volumetric speed test model slicer previews.](assets/mvs-ga.png){height=3in}
 
 ---
 
@@ -49,7 +49,7 @@ For flexible materials, the grid sparse infill method often over estimates the m
 
 The following pictures are examples of good max volumetric speed test process records. 
 
-![Process record example of max volumetric speed test.](assets/mvs-record.png)
+![Process record example of max volumetric speed test.](assets/mvs-record.png){height=3in}
 
 ---
 

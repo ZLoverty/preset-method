@@ -5,15 +5,15 @@
 - All materials
 - All printers
 
-## 1. Purpose
+## Purpose
 
 The goal is to validate the preset parameters produced with this SOP by printing a few more complex and application-oriented models.
 
-## 2. Principles
+## Principle
 
 The models for tuning preset parameters are generally simple (not necessarily easy to print, but lack of combinations of hard-to-print features that can cause issues). To check if a set of parameters in realistic settings, we need to print a few more complex and application-oriented models. This step is more of a "final exam" for a preset. It does not yield any parameters directly, but potentially reveals parameters we have overlooked. 
 
-## 3. Models
+## Models
 
 1. Required: 3DBenchy and Autodesk FDM Test
 2. Recommended: 

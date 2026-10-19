@@ -46,4 +46,4 @@ A model containing stringing, bridge and overhang is printed repeatedly at diffe
 
 Mark the temperature value on the selected temperature band, and take a picture from the mark side.
 
-![Temperature tower process record example picture.](assets/temperature-twoer.png)
+![Temperature tower process record example picture.](assets/temperature-twoer.png){height=3in}

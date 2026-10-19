@@ -7,7 +7,7 @@
 - Rigid plastics (PLA, PETG, ABS, PA, etc.)
 - Most FDM 3D printers
 
-![Cooling tower (fillet) model. Left: model preview in slicer; right: printed model for reference.](assets/cooling-abstract.png)
+![Cooling tower (fillet) model. Left: model preview in slicer; right: printed model for reference.](assets/cooling-abstract.png){height=3in}
 
 ---
 
@@ -59,7 +59,7 @@
 
 Mark fan speed at the bottom of each cooling tower printed. On each tower, mark the smallest printable layer. Put all printed towers together and take a picture. The following is .
 
-![An example of a good cooling process record picture.](assets/cooling-record.png)
+![An example of a good cooling process record picture.](assets/cooling-record.png){height=3in}
 
 ---
 

@@ -7,7 +7,7 @@
 - All FDM printers.
 - All non-foaming thermoplastic materials.
 
-![Retraction test model slicer preview.](assets/retraction_ga.png)
+![Retraction test model slicer preview.](assets/retraction_ga.png){height=3in}
 
 ---
 

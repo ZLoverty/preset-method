@@ -102,6 +102,69 @@
       "review_comment": "Batch approval of validated candidates"
     },
     {
+      "record_id": "tm_05ca73fc51b2d65c615f",
+      "language": "zh-CN",
+      "source_key": "sha256:17bdc9e40323b5738cf5cddfc3ba677f04bfbef290a35198a4ae2eb2e403a73a",
+      "source": "[[[image:0]]]Flow ratio test model slicer preview.[[[/image:0]]]\n[[[image:1]]]Extrusion test result showing two patches. The left patch is labeled \"Optimal\" and has a smooth surface with no obvious defects. The right patch is labeled \"Too large\" and shows a larger extrusion shape with visible depressions.[[[/image:1]]]",
+      "target": "[[[image:0]]]流量比例测试模型切片预览。[[[/image:0]]]\n[[[image:1]]]挤出测试结果显示两个色块。左侧色块标为“最佳”，表面光滑，无明显缺陷。右侧色块标为“过大”，显示出更大的挤出形状，并可见凹陷。[[[/image:1]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-1cd03c053605192385dc",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "f7d9748415390316889bed6f7c0390f1b5244503bfe4629c74af427f99812546",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/flow-ratio-ga.png",
+              ""
+            ]
+          }
+        },
+        {
+          "token": "[[[image:1]]]",
+          "kind": "image",
+          "payload_hash": "6fa665c42a60462387ed658508d523aa75ed900e6258d5d9f2c31827a7232237",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/flow-ratio-test-samples.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:51:03Z",
+      "updated_at": "2026-10-19T01:51:03Z",
+      "reviewed_at": "2026-10-19T01:51:03Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_065aa49341216775892a",
       "language": "zh-CN",
       "source_key": "sha256:ee4b02c73572c9f3bf473e5d99e839afcf574b9a236a02a59f1dbe21152d7d12",
@@ -327,6 +390,47 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_0b52b09f37c7201de34b",
+      "language": "zh-CN",
+      "source_key": "sha256:643e10794b09e376e8169544bec40490bd2132c989f8559de9ec047d799a6fcd",
+      "source": "[[[image:0]]]An example of a good cooling process record picture.[[[/image:0]]]",
+      "target": "[[[image:0]]]冷却过程记录图片示例。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-ccfe59f4054e326bac83",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "2c63786a64c2ea14a7776205b7d512249853c8384518a723e3f2519dc850a49b",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/cooling-record.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:02Z",
+      "updated_at": "2026-10-19T01:50:02Z",
+      "reviewed_at": "2026-10-19T01:50:02Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_0b98c22e167b536bf160",
       "language": "zh-CN",
       "source_key": "sha256:d86fbaccc2af741d57e4d1bc74051233f1133f44e43fcf3b87587e95ee91131d",
@@ -390,7 +494,7 @@
       "language": "zh-CN",
       "source_key": "sha256:561e050b7c26722713de5707a1511134729441911cf6f6431b7e9dd47a386251",
       "source": "Set the [[[fmt:0]]]nozzle temperature[[[/fmt:0]]] in the filament profile to the highest printable temperature for the material.",
-      "target": "将耗材配置中的 [[[fmt:0]]]喷嘴温度[[[/fmt:0]]]设置为该材料的最高可打印温度。",
+      "target": "将耗材配置中的[[[fmt:0]]]喷嘴温度[[[/fmt:0]]]设置为该材料的最高可打印温度。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -444,7 +548,7 @@
       "language": "zh-CN",
       "source_key": "sha256:a375ce38c9a5525bf12bd2027e696a6e67cf179548444ca72025f5dce2d1e79f",
       "source": "Most test models reach a [[[fmt:0]]]shortest layer time of about 2 s[[[/fmt:0]]] (for example, the boat chimney and the sharp tower in the comprehensive model).",
-      "target": "大多数测试模型达到 [[[fmt:0]]]约 2 s 的最短层时间[[[/fmt:0]]]（例如综合模型中的船形烟囱和尖塔）。",
+      "target": "大多数测试模型达到[[[fmt:0]]]约 2 秒的最短层时间[[[/fmt:0]]]（例如综合模型中的船形烟囱和尖塔）。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -1258,6 +1362,47 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_22194a472b020bbcfc34",
+      "language": "zh-CN",
+      "source_key": "sha256:bc27913f285e8d0f3302fd3450ba2b0fe2353744c8922f687e61b6b92eb45ba5",
+      "source": "[[[image:0]]]Max volumetric speed test model slicer previews.[[[/image:0]]]",
+      "target": "[[[image:0]]]最大体积速度测试模型切片预览。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-485b425ee2781c06a385",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "f202a77989576a180728160d7311410b18d67496b2999759af84e03e7ff47a0b",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/mvs-ga.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:50Z",
+      "updated_at": "2026-10-19T01:50:50Z",
+      "reviewed_at": "2026-10-19T01:50:50Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_22528e67e61abf8991da",
       "language": "zh-CN",
       "source_key": "sha256:28d1246abf6c6d93aee871e9ed60af0bcdea0144c3eaa587fdfb8d7df12ec345",
@@ -1399,7 +1544,7 @@
       "language": "zh-CN",
       "source_key": "sha256:f03de51a8adbaddb65123d096aa340e3cd1c42ef200dc4b866c11dae04a0b58e",
       "source": "Rigid materials: downlaod the [[[fmt:0]]]max-speed-rigid[[[/fmt:0]]] model from the [[[fmt:1]]]model library[[[/fmt:1]]].",
-      "target": "刚性材料：从 [[[fmt:1]]]模型库[[[/fmt:1]]] 下载 [[[fmt:0]]]max-speed-rigid[[[/fmt:0]]] 模型。",
+      "target": "刚性材料：从[[[fmt:1]]]模型库[[[/fmt:1]]]下载 [[[fmt:0]]]max-speed-rigid[[[/fmt:0]]] 模型。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -1589,7 +1734,7 @@
       "language": "zh-CN",
       "source_key": "sha256:ffcde31952c470f02ff356f6bbead6e037875a9182a619cf56ca13f775830f21",
       "source": "[[[fmt:0]]]Fan settings[[[/fmt:0]]]: fix the fan at [[[fmt:1]]]0%[[[/fmt:1]]], and set both the [[[fmt:2]]]maximum fan speed threshold[[[/fmt:2]]] and the [[[fmt:3]]]minimum fan speed threshold[[[/fmt:3]]] to 0%.",
-      "target": "[[[fmt:0]]]风扇设置[[[/fmt:0]]]：将风扇固定为 [[[fmt:1]]]0%[[[/fmt:1]]]，并将 [[[fmt:2]]]最大风扇转速阈值[[[/fmt:2]]] 和 [[[fmt:3]]]最小风扇转速阈值[[[/fmt:3]]] 都设为 0%。",
+      "target": "[[[fmt:0]]]风扇设置[[[/fmt:0]]]：将风扇固定为 [[[fmt:1]]]0%[[[/fmt:1]]]，并将[[[fmt:2]]]最大风扇转速阈值[[[/fmt:2]]]和[[[fmt:3]]]最小风扇转速阈值[[[/fmt:3]]]都设为 0%。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -1712,7 +1857,7 @@
       "language": "zh-CN",
       "source_key": "sha256:dc473d13493670ea311b6a2d7efde1043394fb1b961097b08a234e8e19918558",
       "source": "Find where the overall quality is the best, measure the height in mm, (in PA tower, each step is 1 mm, so the height value in mm is equivalent to the step number [[[p:0]]]);",
-      "target": "找到整体质量最佳的位置，以 mm 为单位测量高度（在 PA 塔中，每阶为 1 mm，因此以 mm 表示的高度值等同于阶数 [[[p:0]]]）；",
+      "target": "找到整体质量最佳的位置，以 mm 为单位测量高度（在 PA 塔中，每阶为 1 mm，因此以 mm 为单位的高度值等同于阶数 [[[p:0]]]）；",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -1873,6 +2018,24 @@
       "created_at": "2026-10-15T08:47:21Z",
       "updated_at": "2026-10-15T08:47:21Z",
       "reviewed_at": "2026-10-15T08:47:21Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
+      "record_id": "tm_2d6fc24f23b4707bd966",
+      "language": "zh-CN",
+      "source_key": "sha256:61937bc0e91350f48bcbb086c1b147182a8e5ac648f4c4f8256c11d00d127457",
+      "source": "Models",
+      "target": "模型",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-ec1e67ccea1c1385f8a1",
+      "source_placeholders": [],
+      "created_at": "2026-10-19T04:16:18Z",
+      "updated_at": "2026-10-19T04:16:18Z",
+      "reviewed_at": "2026-10-19T04:16:18Z",
       "reviewer": "local-ui",
       "review_comment": null
     },
@@ -2184,7 +2347,7 @@
       "language": "zh-CN",
       "source_key": "sha256:c6b33444680679f6919dd744397c8faff3be212285591e1fc50636f6e2a2a953",
       "source": "[[[fmt:0]]]Model[[[/fmt:0]]]: Download [[[fmt:1]]]flow-ratio[[[/fmt:1]]] model from the [[[fmt:2]]]model library[[[/fmt:2]]], choose [[[fmt:3]]]Flow Ratio Rough Tune[[[/fmt:3]]].",
-      "target": "[[[fmt:0]]]模型[[[/fmt:0]]]：从 [[[fmt:2]]]模型库[[[/fmt:2]]] 下载 [[[fmt:1]]]flow-ratio[[[/fmt:1]]] 模型，选择 [[[fmt:3]]]流量比粗调[[[/fmt:3]]]。",
+      "target": "[[[fmt:0]]]模型[[[/fmt:0]]]：从[[[fmt:2]]]模型库[[[/fmt:2]]]下载 [[[fmt:1]]]flow-ratio[[[/fmt:1]]] 模型，选择[[[fmt:3]]]流量比粗调[[[/fmt:3]]]。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -2600,7 +2763,7 @@
       "language": "zh-CN",
       "source_key": "sha256:bed2770eed3b4b5c91bd34bd874fd5382243e171a6d38c0066e42f0855803dbf",
       "source": "Set fan thresholds according to the results of the cooling calibration, enable [[[fmt:0]]]keep fan always on[[[/fmt:0]]], disable [[[fmt:1]]]slow down print for better cooling[[[/fmt:1]]], and disable [[[fmt:2]]]force cooling for overhangs/bridges[[[/fmt:2]]].",
-      "target": "根据冷却校准的结果设置风扇阈值，启用 [[[fmt:0]]]保持风扇常开[[[/fmt:0]]]，禁用 [[[fmt:1]]]降低打印速度以获得更好的冷却[[[/fmt:1]]]，并禁用 [[[fmt:2]]]悬垂/桥接强制冷却[[[/fmt:2]]]。",
+      "target": "根据冷却校准的结果设置风扇阈值，启用[[[fmt:0]]]保持风扇常开[[[/fmt:0]]]，禁用[[[fmt:1]]]降低打印速度以获得更好的冷却[[[/fmt:1]]]，并禁用[[[fmt:2]]]悬垂/桥接强制冷却[[[/fmt:2]]]。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -3402,7 +3565,7 @@
       "language": "zh-CN",
       "source_key": "sha256:75b1dfc3cd9ec00d2e9a518c65cea2bf79ab70dd728d4953278bfc8f26435b51",
       "source": "Printers with Sparse infill acceleration [[[p:0]]]",
-      "target": "具有稀疏填充加速度   的打印机 [[[p:0]]]",
+      "target": "稀疏填充加速度[[[p:0]]]",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -3435,7 +3598,7 @@
       "language": "zh-CN",
       "source_key": "sha256:a058d93111176ef8cdfedf99c5fdb053dd1f5c6e0b6e6eda65692050e2f25296",
       "source": "[[[fmt:0]]]Model[[[/fmt:0]]]: from [[[fmt:1]]]model library[[[/fmt:1]]], download the [[[fmt:2]]]cooling fillet[[[/fmt:2]]] model.",
-      "target": "[[[fmt:0]]]模型[[[/fmt:0]]]：从 [[[fmt:1]]]模型库[[[/fmt:1]]] 中下载 [[[fmt:2]]]cooling-fillet[[[/fmt:2]]] 模型。",
+      "target": "[[[fmt:0]]]模型[[[/fmt:0]]]：从[[[fmt:1]]]模型库[[[/fmt:1]]]中下载 [[[fmt:2]]]cooling-fillet[[[/fmt:2]]] 模型。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -3753,7 +3916,7 @@
       "language": "zh-CN",
       "source_key": "sha256:e42468652c6150f63dfa6795fd696faf3a40e92d45366b49863be2157839b327",
       "source": "Download [[[fmt:0]]]temperature-tower[[[/fmt:0]]] model from [[[fmt:1]]]model library[[[/fmt:1]]], use \"flexible\" version for flexible materials (e.g. TPU), and use \"rigid\" version otherwise.",
-      "target": "下载 [[[fmt:0]]]temperature-tower[[[/fmt:0]]] 模型（来自 [[[fmt:1]]]模型库[[[/fmt:1]]]），柔性材料（例如 TPU）使用 \"flexible\" 版本，其他情况使用 \"rigid\" 版本。",
+      "target": "下载 [[[fmt:0]]]temperature-tower[[[/fmt:0]]] 模型（来自[[[fmt:1]]]模型库[[[/fmt:1]]]），柔性材料（例如 TPU）使用 \"flexible\" 版本，其他情况使用 \"rigid\" 版本。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -4320,6 +4483,47 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_6bb099de4ae0bc97a8d0",
+      "language": "zh-CN",
+      "source_key": "sha256:45faae47beb7b09b7c45742ee2e479feb69ae923aa5ef6eb9b32ab9e241bf8e9",
+      "source": "[[[image:0]]]Cooling tower (fillet) model. Left: model preview in slicer; right: printed model for reference.[[[/image:0]]]",
+      "target": "[[[image:0]]]冷却塔（圆角）模型。左：切片软件中的模型预览；右：打印出的模型供参考。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-99af95bb21aeec77c1c9",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "a6f2860faf2c8e2cd35dc94026a4ad77ac06832df6e679bfd58db3757876aa8f",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/cooling-abstract.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:19Z",
+      "updated_at": "2026-10-19T01:50:19Z",
+      "reviewed_at": "2026-10-19T01:50:19Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_6be81016cd1c1f51f568",
       "language": "zh-CN",
       "source_key": "sha256:bc12edc2140bb4059ab682546fa469246177e384c9a9f7585b744929f0ea7764",
@@ -4628,6 +4832,47 @@
       "reviewed_at": "2026-10-15T09:05:14Z",
       "reviewer": "batch-approve",
       "review_comment": "Batch approval of validated candidates"
+    },
+    {
+      "record_id": "tm_75c669f5c87cfdb7b25e",
+      "language": "zh-CN",
+      "source_key": "sha256:0ab8ebf02331ce291878db4fe028cbb047b0042dc9ce09f293bf6f9d9cac89f1",
+      "source": "[[[image:0]]]Flow ratio process record example picture.[[[/image:0]]]",
+      "target": "[[[image:0]]]流量比例过程记录示例图片。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-5830388dec0f8fffdabf",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "6f30e13f55a0729389e7cc891f42b26e57471fe4d05bd8776efeb55fc98c6311",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/flow-ratio-example.jpg",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:07Z",
+      "updated_at": "2026-10-19T01:50:07Z",
+      "reviewed_at": "2026-10-19T01:50:07Z",
+      "reviewer": "local-ui",
+      "review_comment": null
     },
     {
       "record_id": "tm_75c7f4eb215231ac1b65",
@@ -5187,7 +5432,7 @@
       "language": "zh-CN",
       "source_key": "sha256:b5ce10046113cb1f83949bedd5fbf44febb6b9fc7bb995c7bcb03146b0ef9020",
       "source": "[[[fmt:0]]]Fan settings[[[/fmt:0]]]: Fix the fan at [[[fmt:1]]]100%[[[/fmt:1]]], and set both the [[[fmt:2]]]maximum fan speed threshold[[[/fmt:2]]] and the [[[fmt:3]]]minimum fan speed threshold[[[/fmt:3]]] to 100%.",
-      "target": "[[[fmt:0]]]风扇设置[[[/fmt:0]]]：将风扇固定在 [[[fmt:1]]]100%[[[/fmt:1]]]，并将 [[[fmt:2]]]最大风扇速度阈值[[[/fmt:2]]] 和 [[[fmt:3]]]最小风扇速度阈值[[[/fmt:3]]] 均设置为 100%。",
+      "target": "[[[fmt:0]]]风扇设置[[[/fmt:0]]]：将风扇固定在 [[[fmt:1]]]100%[[[/fmt:1]]]，并将[[[fmt:2]]]最大风扇速度阈值[[[/fmt:2]]]和[[[fmt:3]]]最小风扇速度阈值[[[/fmt:3]]]均设置为 100%。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -5717,6 +5962,47 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_939e3318ec915b3b381d",
+      "language": "zh-CN",
+      "source_key": "sha256:1e3709a493f31a60c503ee6af9c64bc7eab161ad3b1d9a22ac5fa9d60b660355",
+      "source": "[[[image:0]]]Pressure advance measurement guide. The green gauge has a numbered scale on the left and a V-slot on the right. Red lines inside the V-slot correspond to positions 1, 2, 3, and 4. Lines 1, 2, and 3 align with the scale, while line 4 does not. This shows how to read the PA value from the V-slot alignment.[[[/image:0]]]",
+      "target": "[[[image:0]]]压力提前量测量指南。绿色量规左侧为带编号的刻度，右侧为 V 型槽。V 型槽内的红线对应位置 1、2、3 和 4。线 1、2 和 3 与刻度对齐，而线 4 未对齐。这展示了如何根据 V 型槽的对齐情况读取 PA 值。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-14a5bacd7b937508aafe",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "9cc503d99a9ace625bab04151739ac1c7aab4e844047fe975f0b5249d83eb675",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/pressure-advance-measurement.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:48Z",
+      "updated_at": "2026-10-19T01:50:48Z",
+      "reviewed_at": "2026-10-19T01:50:48Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_93a18a72056b82700d38",
       "language": "zh-CN",
       "source_key": "sha256:18c7f61bd5f90e75c37ea74ec3823df3de34efd07c5733f7d6b33d2ec4dd6e30",
@@ -5994,6 +6280,47 @@
       "review_comment": "Batch approval of validated candidates"
     },
     {
+      "record_id": "tm_98eb71148e1b49567095",
+      "language": "zh-CN",
+      "source_key": "sha256:3dfcaac81652e31d13e4d8c57cc9b81270fc4c70c6d0a4285c972b5e349413ee",
+      "source": "[[[image:0]]]Process record example of max volumetric speed test.[[[/image:0]]]",
+      "target": "[[[image:0]]]最大体积速度测试的过程记录示例。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-9a1187b78c1037571e8a",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "dcb186c4fbab8c7909729b46b3c620fe8327eb0a814a9933530850e3f0367827",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/mvs-record.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:15Z",
+      "updated_at": "2026-10-19T01:50:15Z",
+      "reviewed_at": "2026-10-19T01:50:15Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_9926123680916de070f1",
       "language": "zh-CN",
       "source_key": "sha256:8fed1e49343eb59fa31aa32e9148eb53919a3a560fd718fcfe2e7af2d48af6e4",
@@ -6142,7 +6469,7 @@
       "language": "zh-CN",
       "source_key": "sha256:7c0e5ad348f8ef637680327d29856ff60ec851917a60ac5d90f1209f5855e1a8",
       "source": "Set [[[fmt:0]]]Start retraction length[[[/fmt:0]]] [[[p:1]]] to 0, [[[fmt:2]]]End retraction length[[[/fmt:2]]] [[[p:3]]] to 2 for direct drive or 6 for Bowden, and [[[fmt:4]]]Step[[[/fmt:4]]] [[[p:5]]] to 0.1.",
-      "target": "将 [[[fmt:0]]]起始回抽长度[[[/fmt:0]]] [[[p:1]]] 设为 0，[[[fmt:2]]]结束回抽长度[[[/fmt:2]]] [[[p:3]]] 对于直驱设为 2，对于 Bowden 设为 6，并将 [[[fmt:4]]]步长[[[/fmt:4]]] [[[p:5]]] 设为 0.1。",
+      "target": "将[[[fmt:0]]]起始回抽长度[[[/fmt:0]]] [[[p:1]]] 设为 0，[[[fmt:2]]]结束回抽长度[[[/fmt:2]]] [[[p:3]]] 对于直驱设为 2，对于远程驱动设为 6，并将 [[[fmt:4]]]步长[[[/fmt:4]]] [[[p:5]]] 设为 0.1。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -7168,6 +7495,47 @@
       "reviewed_at": "2026-10-15T09:05:14Z",
       "reviewer": "batch-approve",
       "review_comment": "Batch approval of validated candidates"
+    },
+    {
+      "record_id": "tm_b958099454c1f16eaf91",
+      "language": "zh-CN",
+      "source_key": "sha256:8bd4235a46816ff315f9587e53c5ba8319744dcb11d45273fe3cdc616af319d4",
+      "source": "[[[image:0]]]Retraction test model slicer preview.[[[/image:0]]]",
+      "target": "[[[image:0]]]回抽测试模型切片预览。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-c8fd64e3ba5390add98e",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "dbbe121b4e4160fd9f324f1925aa24416f01a1e7d8ea8545646f26baa0baf314",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/retraction_ga.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:10Z",
+      "updated_at": "2026-10-19T01:50:10Z",
+      "reviewed_at": "2026-10-19T01:50:10Z",
+      "reviewer": "local-ui",
+      "review_comment": null
     },
     {
       "record_id": "tm_ba3a5a2a1466526f2af5",
@@ -8634,7 +9002,7 @@
       "language": "zh-CN",
       "source_key": "sha256:20349248c42445e7965c32ca0e4410cdf90e9b7bbe37977db97470c2a34d3375",
       "source": "Download [[[fmt:0]]]key-warp[[[/fmt:0]]] model from the [[[fmt:1]]]model library[[[/fmt:1]]].",
-      "target": "从 [[[fmt:1]]]模型库[[[/fmt:1]]] 下载 [[[fmt:0]]]key-warp[[[/fmt:0]]] 模型。",
+      "target": "从[[[fmt:1]]]模型库[[[/fmt:1]]]下载[[[fmt:0]]]key-warp[[[/fmt:0]]]模型。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -8827,6 +9195,47 @@
       "review_comment": null
     },
     {
+      "record_id": "tm_e7511226c32714bd6ebb",
+      "language": "zh-CN",
+      "source_key": "sha256:22624078f566aea7172398abde96f4648f433c4ee520fcdf1d9c5613adbf7fef",
+      "source": "[[[image:0]]]Temperature tower process record example picture.[[[/image:0]]]",
+      "target": "[[[image:0]]]温度塔过程记录示例图片。[[[/image:0]]]",
+      "status": "approved",
+      "context": {},
+      "canonicalization_version": 1,
+      "source_schema_version": 1,
+      "occurrence_id": "seg-6990788e7ac60a293610",
+      "source_placeholders": [
+        {
+          "token": "[[[image:0]]]",
+          "kind": "image",
+          "payload_hash": "b82ed964d7f67b6a88b9762e4424c0583a5e5abb30e26a04090291fba55c0027",
+          "payload": {
+            "t": "Image",
+            "attr": [
+              "",
+              [],
+              [
+                [
+                  "height",
+                  "3in"
+                ]
+              ]
+            ],
+            "target": [
+              "assets/temperature-twoer.png",
+              ""
+            ]
+          }
+        }
+      ],
+      "created_at": "2026-10-19T01:50:22Z",
+      "updated_at": "2026-10-19T01:50:22Z",
+      "reviewed_at": "2026-10-19T01:50:22Z",
+      "reviewer": "local-ui",
+      "review_comment": null
+    },
+    {
       "record_id": "tm_e869c50d7dd02dea0f84",
       "language": "zh-CN",
       "source_key": "sha256:6f1a9b0999f1847789001c406b93f1da36cc09ceee9400260cdf4f3f88c5000d",
@@ -8963,7 +9372,7 @@
       "language": "zh-CN",
       "source_key": "sha256:7bb59dbce809987f4fc0b106ec33e8390faa5492359a3324d32c6c173d4e9f86",
       "source": "Set [[[fmt:0]]]printing temperature[[[/fmt:0]]] and [[[fmt:1]]]cooling parameters[[[/fmt:1]]] according to the previous test results.",
-      "target": "根据之前的测试结果，设置 [[[fmt:0]]]打印温度[[[/fmt:0]]] 和 [[[fmt:1]]]冷却参数[[[/fmt:1]]]。",
+      "target": "根据之前的测试结果，设置[[[fmt:0]]]打印温度[[[/fmt:0]]]和[[[fmt:1]]]冷却参数[[[/fmt:1]]]。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -9433,7 +9842,7 @@
       "language": "zh-CN",
       "source_key": "sha256:adf8a79d71e39e48e73f248573bd3b625e8b61101fc09cfd2e260d611a9437b2",
       "source": "[[[fmt:0]]]Observe and record[[[/fmt:0]]]: find the [[[fmt:1]]]shortest printable layer time[[[/fmt:1]]] that still prints without obvious curling (see example picture for reference), and record",
-      "target": "[[[fmt:0]]]观察并记录[[[/fmt:0]]]：找到 [[[fmt:1]]]最短可打印层时间[[[/fmt:1]]]，即仍能打印且无明显卷曲（参见示例图片），并记录",
+      "target": "[[[fmt:0]]]观察并记录[[[/fmt:0]]]：找到[[[fmt:1]]]最短可打印层时间[[[/fmt:1]]]，即仍能打印且无明显上翘（参见示例图片），并记录",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,
@@ -9571,7 +9980,7 @@
       "language": "zh-CN",
       "source_key": "sha256:a97c3da9c5f093803975a4cd020681c96e53f9363df2aed22609c5ad0e3114f8",
       "source": "[[[fmt:0]]]Preview check[[[/fmt:0]]]: After slicing, confirm that the [[[fmt:1]]]fan[[[/fmt:1]]], [[[fmt:2]]]layer time[[[/fmt:2]]], and [[[fmt:3]]]temperature[[[/fmt:3]]] settings match the intended values.",
-      "target": "[[[fmt:0]]]预览检查[[[/fmt:0]]]：切片后，确认 [[[fmt:1]]]风扇[[[/fmt:1]]]、[[[fmt:2]]]层时间[[[/fmt:2]]] 和 [[[fmt:3]]]温度[[[/fmt:3]]] 设置与预期值一致。",
+      "target": "[[[fmt:0]]]预览检查[[[/fmt:0]]]：切片后，确认[[[fmt:1]]]风扇[[[/fmt:1]]]、[[[fmt:2]]]层时间[[[/fmt:2]]]和[[[fmt:3]]]温度[[[/fmt:3]]]设置与预期值一致。",
       "status": "approved",
       "context": {},
       "canonicalization_version": 1,

@@ -13,6 +13,12 @@
 
 Find a bed temperature that minimizes warpage.
 
+Notes：
+
+- Use this method only if the material being tested is very prone to warping.
+- It is recommended to clean the print bed thoroughly before the test.
+- Refrain from using glue in this test, unless it is absolutely necessary.
+
 ## Principle
 
 A key-shaped model with a sharp tip is printed at different bed temperatures to determine a bed temperature that minimizes warpage. Due to stress concentration, the sharp tip of the model detaches from the hot bed upon tiny tendency of shrinkage. From then on, most residual stress tend to release near the sharp tip, making it curl up. By comparing the extent of the curling of models printed at different bed temperatures, one can tell which bed temperature provides better adhesion.
@@ -35,9 +41,3 @@ A key-shaped model with a sharp tip is printed at different bed temperatures to 
 ## Process record
 
 Take picture(s) of key-shaped models printed at different temperature side-by-side. Label the corresponding bed temperatures so one can tell clearly which bed temperature performs better in terms of warpage (see the graphic abstract of this section for an example).
-
-## Notes
-
-- Use this method only if the material being tested is very prone to warping.
-- It is recommended to clean the print bed thoroughly before the test.
-- Refrain from using glue in this test, unless it is absolutely necessary.

@@ -7,8 +7,8 @@
 - All materials
 - Most 3D printers
 
-![Flow ratio test model slicer preview.](assets/flow-ratio-ga.png)
-![Extrusion test result showing two patches. The left patch is labeled "Optimal" and has a smooth surface with no obvious defects. The right patch is labeled "Too large" and shows a larger extrusion shape with visible depressions.](assets/flow-ratio-test-samples.png)
+![Flow ratio test model slicer preview.](assets/flow-ratio-ga.png){height=3in}
+![Extrusion test result showing two patches. The left patch is labeled "Optimal" and has a smooth surface with no obvious defects. The right patch is labeled "Too large" and shows a larger extrusion shape with visible depressions.](assets/flow-ratio-test-samples.png){height=3in}
 ---
 
 ## Purpose
@@ -69,6 +69,6 @@ The test uses a two-step approach: a wide-range **Rough Tune** followed by a nar
 
 Mark $F_{\text{RoughTuned}}$ and $F_{\text{FineTuned}}$ clearly on the selected patches. Put all printed patches together, in order, and take a picture from the marked side. 
 
-![Flow ratio process record example picture.](assets/flow-ratio-example.jpg)
+![Flow ratio process record example picture.](assets/flow-ratio-example.jpg){height=3in}
 
 
